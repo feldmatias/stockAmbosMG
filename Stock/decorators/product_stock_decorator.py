@@ -1,17 +1,11 @@
-from Products.models import Product
+from Products.decorators.product_bar_decorator import ProductBarDecorator
 from Stock.models import Stock
 
 
-class ProductStockDecorator:
+class ProductStockDecorator(ProductBarDecorator):
     def __init__(self, product):
-        self.product = product
+        super().__init__(product)
         self.stock = self._initialize_stock()
-
-    def all_products(self):
-        return Product.objects.all().order_by('id')
-
-    def product(self):
-        return self.product
 
     def stock(self):
         return self.stock

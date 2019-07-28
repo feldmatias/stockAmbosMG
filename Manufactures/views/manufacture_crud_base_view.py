@@ -10,4 +10,4 @@ class ManufactureCrudBaseView(View):
 
         manufacture_id = kwargs.get('id')
         self.manufacture = get_object_or_404(Manufacture, pk=manufacture_id)
-        self.current_state = self.manufacture.state
+        self.current_status = self.manufacture.status

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1 class="text-center mt-5"><u>Nuevo Corte</u></h1>
+
+    {% include "products/products_bar.html" with products=data.all_products selected=data.product url='manufactures:create-product' %}
+
+    {% if data.product %}
+
+        <form method="POST" action="{% url 'manufactures:create-product' id=data.product.id %}"
+              onsubmit="return validate_manufacture_form()">
+            {% csrf_token %}
+
+            <div class="row justify-content-center" style="font-size: x-large;">
+                <label class="mr-3 col-1 text-right">Estado:</label>
+                <select class="form-control col-2 text-center" name="status" required>
+                    {% for status in data.all_states %}
+                        <option value="{{ status.0 }}">{{ status.1|title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="text-center mt-5" style="font-size: x-large;">
+                <label class="mr-5">Talle:</label>
+                {% for size in data.product.sizes %}
+                    <div class="form-check form-check-inline mr-5">
+                        <input class="form-check-input mr-2" style="transform:scale(1.5);" type="radio"
+                               name="product-size" value="{{ size.id }}" required>
+                        <label class="form-check-label">{{ size.size|upper }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="text-center mx-5 mt-5">
+                <div class="row mx-5 justify-content-center">
+                    {% for color in data.product.colors %}
+                        <div class="col-3">
+                            <div class="form-group row">
+                                <label class="col-6 col-form-label text-right mr-3">{{ color.color|title }}</label>
+                                <input type="number" min="0" name="color-{{ color.id }}"
+                                       class="form-control col-4 text-center product-color-input" value="0" required>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a class="btn btn-link" href="{% url 'manufactures:index' %}">Cancelar</a>
+                <input type="submit" class="btn btn-primary btn-lg" value="Crear">
+            </div>
+
+        </form>
+
+    {% endif %}
+
+
+    <script src="{% static 'manufactures/validation.js' %}"></script>
+{% endblock %}

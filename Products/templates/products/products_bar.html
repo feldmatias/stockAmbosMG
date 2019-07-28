@@ -2,7 +2,7 @@
 
     {% for product in products %}
         <a class="btn {% if product == selected %} btn-secondary {% else %} btn-outline-secondary {% endif %} mt-3 mx-3 btn-lg"
-           href="{% url 'stock:stock' id=product.id %}">{{ product.name|title }}</a>
+           href="{% url url id=product.id %}">{{ product.name|title }}</a>
     {% endfor %}
 
 </div>

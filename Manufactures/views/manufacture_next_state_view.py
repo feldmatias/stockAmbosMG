@@ -7,4 +7,4 @@ class ManufactureNextStateView(ManufactureCrudBaseView):
 
     def post(self, request, *args, **kwargs):
         self.manufacture.next_status()
-        return redirect('manufactures:list', state=self.current_state)
+        return redirect('manufactures:list', state=self.current_status)

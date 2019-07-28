@@ -7,4 +7,4 @@ class ManufactureDeleteView(ManufactureCrudBaseView):
 
     def post(self, request, *args, **kwargs):
         self.manufacture.delete()
-        return redirect('manufactures:list', state=self.current_state)
+        return redirect('manufactures:list', state=self.current_status)
