@@ -1,0 +1,8 @@
+<div class="text-center my-5">
+
+    {% for state in states %}
+        <a class="btn {% if state.0 == selected %} btn-secondary {% else %} btn-outline-secondary {% endif %} mt-3 mx-3 btn-lg"
+           href="{% url 'manufactures:list' state=state.0 %}">{{ state.1|title }}</a>
+    {% endfor %}
+
+</div>

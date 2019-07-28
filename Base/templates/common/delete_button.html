@@ -1,0 +1,16 @@
+{% load random_string %}
+{% random_string as random %}
+
+<form method="POST" action="{% url url id=id %}" id="delete-form-{{ random }}">
+    {% csrf_token %}
+</form>
+<button class="btn {{ class }} shadow-none" onclick="delete_item_{{ random }}()">Eliminar</button>
+
+<script>
+    function delete_item_{{ random }}() {
+        let result = confirm("Está seguro que desea eliminarlo?");
+        if (result) {
+            $("#delete-form-{{ random }}").submit()
+        }
+    }
+</script>

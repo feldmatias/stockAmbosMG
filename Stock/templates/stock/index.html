@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load dictionary_get_item %}
+
+{% block content %}
+    {% include "stock/products_bar.html" with products=data.all_products selected=data.product %}
+
+    {% if data.product %}
+        <div class="text-center mb-3">
+            <h1><u>{{ data.product.name|title }}</u></h1>
+        </div>
+
+        <form method="POST" action="{% url 'stock:stock' id=data.product.id %}" class="mx-5">
+            {% csrf_token %}
+            <table class="table table-bordered table-hover" style="table-layout: fixed">
+                <thead>
+                <tr>
+                    <th scope="col"></th>
+
+                    {% for color in data.product.colors %}
+                        <th scope="col" class="bg-light text-center">{{ color.color|title }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for size in data.product.sizes %}
+                    <tr>
+                        <th scope="row" class="bg-light text-center">{{ size.size|upper }}</th>
+
+                        {% for color in data.product.colors %}
+                            {% with stock=data.stock|get_item:color|get_item:size %}
+                                <td class="text-center">
+                                    {% if editable %}
+                                        <input type="number" class="form-control text-center" value="{{ stock.stock }}"
+                                               min="0" required name="stock-{{ stock.id }}" autocomplete="off">
+                                    {% else %}
+                                        {{ stock.stock }}
+                                    {% endif %}
+                                </td>
+                            {% endwith %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            {% if editable %}
+                <div class="text-center mt-5">
+                    <a class="btn btn-link" href="{% url 'stock:stock' id=data.product.id %}">Cancelar</a>
+                    <input type="submit" class="btn btn-primary" value="Actualizar">
+                </div>
+            {% endif %}
+
+        </form>
+
+        {% if not editable %}
+            <div class="text-center mt-5">
+                <a class="btn btn-primary" href="{% url 'stock:stock' id=data.product.id %}?editable=1">Editar</a>
+            </div>
+        {% endif %}
+
+    {% endif %}
+{% endblock %}

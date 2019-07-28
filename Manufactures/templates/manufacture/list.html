@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load state_date_title %}
+
+{% block content %}
+    {% include "manufacture/states_bar.html" with states=data.all_states selected=data.state %}
+
+    {% if data.state %}
+
+        <div class="mx-5 mb-5">
+
+            {% if data.manufactures %}
+                <table class="table border border-dark">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="bg-light text-center border border-dark">Producto</th>
+                        <th scope="col"
+                            class="bg-light text-center border border-dark">{{ data.state|state_date_title }}</th>
+                        <th scope="col" class="bg-light text-center border border-dark">Talle</th>
+                        <th scope="col" class="bg-light text-center border border-dark">Colores</th>
+                        <th scope="col" class="bg-light text-center border border-dark">Acciones</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    {% for manufacture in data.manufactures %}
+
+                        <tr>
+                            <td class="text-center align-middle border border-dark"
+                                style="font-size: 2.2em">{{ manufacture.product.name|title }}</td>
+                            <td class="text-center align-middle border border-dark"
+                                style="font-size: 1.7em">{{ manufacture.updated_at|date:'d / m' }}</td>
+                            <td class="text-center align-middle border border-dark"
+                                style="font-size: 1.7em">{{ manufacture.size.size|upper }}</td>
+                            <td class="text-center align-middle border border-dark">
+                                <ul class="list-group list-group-flush">
+                                    {% for item in manufacture.items %}
+                                        <li class="list-group-item">
+                                            <span>{{ item.color.color|title }}</span>
+                                            <span class="border border-secondary rounded-circle ml-4 px-3 py-1">{{ item.count }}</span>
+                                        </li>
+
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                            <td class="text-center align-middle border border-dark">
+                                {% include 'manufacture/actions.html' with manufacture=manufacture state=data.state %}
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+
+            {% else %}
+
+                <div class="text-center font-italic text-primary h1">
+                    No hay cortes
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    {% endif %}
+
+{% endblock %}

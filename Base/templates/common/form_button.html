@@ -1,0 +1,13 @@
+{% load random_string %}
+{% random_string as random %}
+
+<form method="POST" action="{% url url id=id %}" id="button-form-{{ random }}">
+    {% csrf_token %}
+</form>
+<button class="btn {{ class }}" onclick="submit_form_{{ random }}()">{{ label }}</button>
+
+<script>
+    function submit_form_{{ random }}() {
+        $("#button-form-{{ random }}").submit()
+    }
+</script>
