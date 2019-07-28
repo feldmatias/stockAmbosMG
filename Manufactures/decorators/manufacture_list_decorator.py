@@ -7,7 +7,7 @@ class ManufactureListDecorator:
         self._initialize_manufactures()
 
     def all_states(self):
-        return Manufacture.STATES
+        return Manufacture.STATUS
 
     def state(self):
         return self.state
@@ -16,4 +16,4 @@ class ManufactureListDecorator:
         return self.manufactures
 
     def _initialize_manufactures(self):
-        self.manufactures = Manufacture.repository.find_by_state(self.state) if self.state else []
+        self.manufactures = Manufacture.repository.find_by_status(self.state) if self.state else []
