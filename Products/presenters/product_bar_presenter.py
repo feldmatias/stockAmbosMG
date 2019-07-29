@@ -1,7 +1,7 @@
 from Products.models import Product
 
 
-class ProductBarDecorator:
+class ProductBarPresenter:
     def __init__(self, product=None):
         self.product = product
 

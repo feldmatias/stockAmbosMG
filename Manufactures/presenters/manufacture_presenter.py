@@ -1,8 +1,8 @@
 from Manufactures.models import Manufacture
-from Products.decorators.product_bar_decorator import ProductBarDecorator
+from Products.presenters.product_bar_presenter import ProductBarPresenter
 
 
-class ManufactureDecorator(ProductBarDecorator):
+class ManufacturePresenter(ProductBarPresenter):
     def __init__(self, product=None, manufacture=None):
         super().__init__(manufacture.product if manufacture else product)
         self.manufacture = manufacture

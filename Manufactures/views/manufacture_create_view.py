@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 
-from Manufactures.decorators.manufacture_decorator import ManufactureDecorator
+from Manufactures.presenters.manufacture_presenter import ManufacturePresenter
 from Manufactures.models import Manufacture
 from Products.models import Product, ProductSize, ProductColor
 
@@ -15,7 +15,7 @@ class ManufactureCreateView(View):
         product = get_object_or_404(Product, pk=product_id) if product_id != 0 else None
 
         data = {
-            'data': ManufactureDecorator(product=product)
+            'data': ManufacturePresenter(product=product)
         }
 
         return render(request, 'manufacture/create.html', data)

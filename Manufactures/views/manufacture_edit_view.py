@@ -1,9 +1,8 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 
-from Manufactures.decorators.manufacture_decorator import ManufactureDecorator
 from Manufactures.models import Manufacture
-from Products.models import Product, ProductSize, ProductColor
+from Manufactures.presenters.manufacture_presenter import ManufacturePresenter
 
 
 class ManufactureEditView(View):
@@ -13,8 +12,7 @@ class ManufactureEditView(View):
         manufacture = get_object_or_404(Manufacture, pk=manufacture_id)
 
         data = {
-            'data': ManufactureDecorator(manufacture=manufacture)
+            'data': ManufacturePresenter(manufacture=manufacture)
         }
 
         return render(request, 'manufacture/create.html', data)
-

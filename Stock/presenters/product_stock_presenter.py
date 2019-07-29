@@ -1,8 +1,8 @@
-from Products.decorators.product_bar_decorator import ProductBarDecorator
+from Products.presenters.product_bar_presenter import ProductBarPresenter
 from Stock.models import Stock
 
 
-class ProductStockDecorator(ProductBarDecorator):
+class ProductStockPresenter(ProductBarPresenter):
     def __init__(self, product):
         super().__init__(product)
         self.stock = self._initialize_stock()

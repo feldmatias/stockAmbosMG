@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 
 from Products.models import Product
-from Stock.decorators.product_stock_decorator import ProductStockDecorator
+from Stock.presenters.product_stock_presenter import ProductStockPresenter
 from Stock.models import Stock
 
 STOCK_NAME = 'stock-'
@@ -17,7 +17,7 @@ class StockView(View):
         product = get_object_or_404(Product, pk=product_id) if product_id != 0 else None
 
         data = {
-            'data': ProductStockDecorator(product),
+            'data': ProductStockPresenter(product),
             'editable': editable
         }
         return render(request, 'stock/index.html', data)

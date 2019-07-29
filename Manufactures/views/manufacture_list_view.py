@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 
-from Manufactures.decorators.manufacture_list_decorator import ManufactureListDecorator
+from Manufactures.presenters.manufacture_list_presenter import ManufactureListPresenter
 
 
 class ManufactureListView(View):
@@ -10,7 +10,7 @@ class ManufactureListView(View):
         state = kwargs.get('state')
 
         data = {
-            'data': ManufactureListDecorator(state)
+            'data': ManufactureListPresenter(state)
         }
 
         return render(request, 'manufacture/list.html', data)

@@ -1,8 +1,8 @@
 from Manufactures.models import Manufacture
-from Products.decorators.product_bar_decorator import ProductBarDecorator
+from Products.presenters.product_bar_presenter import ProductBarPresenter
 
 
-class ManufactureListDecorator(ProductBarDecorator):
+class ManufactureListPresenter(ProductBarPresenter):
     def __init__(self, state):
         super().__init__()
         self.state = state
