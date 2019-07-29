@@ -1,6 +1,9 @@
+{% load get_all_products %}
+{% get_all_products as all_products %}
+
 <div class="text-center my-5">
 
-    {% for product in products %}
+    {% for product in all_products %}
         <a class="btn {% if product == selected %} btn-secondary {% else %} btn-outline-secondary {% endif %} mt-3 mx-3 btn-lg"
            href="{% url url id=product.id %}">{{ product.name|title }}</a>
     {% endfor %}

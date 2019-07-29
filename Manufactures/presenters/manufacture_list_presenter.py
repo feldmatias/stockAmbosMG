@@ -1,15 +1,10 @@
 from Manufactures.models import Manufacture
-from Products.presenters.product_bar_presenter import ProductBarPresenter
 
 
-class ManufactureListPresenter(ProductBarPresenter):
+class ManufactureListPresenter:
     def __init__(self, state):
-        super().__init__()
         self.state = state
         self._initialize_manufactures()
-
-    def all_states(self):
-        return Manufacture.STATUS
 
     def state(self):
         return self.state

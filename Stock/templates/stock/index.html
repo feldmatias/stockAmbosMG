@@ -2,7 +2,7 @@
 {% load dictionary_get_item %}
 
 {% block content %}
-    {% include "products/products_bar.html" with products=data.all_products selected=data.product url='stock:stock' %}
+    {% include "products/products_bar.html" with selected=data.product url='stock:stock' %}
 
     {% if data.product %}
         <div class="text-center mb-3">

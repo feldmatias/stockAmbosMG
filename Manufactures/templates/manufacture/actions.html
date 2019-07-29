@@ -1,8 +1,8 @@
-{% load state_action_next %}
+{% load manufacture_state_action_next %}
 
 <div class="btn-group-vertical">
 
-    {% include 'common/form_button.html' with url='manufactures:next-state' id=manufacture.id class='btn-outline-secondary btn-sm mb-2' label=state|state_action_next %}
+    {% include 'common/form_button.html' with url='manufactures:next-state' id=manufacture.id class='btn-outline-secondary btn-sm mb-2' label=state|manufacture_state_action_next %}
 
     <a  href="{% url 'manufactures:edit' id=manufacture.id %}" class="btn btn-outline-secondary mb-2 btn-sm">Editar</a>
 

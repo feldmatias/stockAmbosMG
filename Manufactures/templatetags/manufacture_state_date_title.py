@@ -6,7 +6,7 @@ register = template.Library()
 
 
 @register.filter
-def state_date_title(state):
+def manufacture_state_date_title(state):
     state_dates = {
         Manufacture.STATUS_PREPARATION: 'Fecha de creación',
         Manufacture.STATUS_CUT: 'Fecha de corte',

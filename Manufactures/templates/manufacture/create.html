@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
-{% load static manufacture_color_count %}
+{% load static manufacture_color_count manufacture_all_states %}
 
 {% block content %}
+    {% manufacture_all_states as all_states %}
+
     <h1 class="text-center mt-5"><u>{% if data.manufacture %}Editar{% else %}Nuevo{% endif %} Corte</u></h1>
 
     {% if not data.manufacture %}
-        {% include "products/products_bar.html" with products=data.all_products selected=data.product url='manufactures:create-product' %}
+        {% include "products/products_bar.html" with selected=data.product url='manufactures:create-product' %}
     {% endif %}
 
     {% if data.product %}
@@ -21,7 +23,7 @@
             <div class="row justify-content-center mt-5" style="font-size: x-large;">
                 <label class="mr-3 col-1 text-right">Estado:</label>
                 <select class="form-control col-2 text-center" name="status" required>
-                    {% for status in data.all_states %}
+                    {% for status in all_states %}
                         <option value="{{ status.0 }}" {% if status.0 == data.selected_status %}
                                 selected {% endif %}>{{ status.1|title }}</option>
                     {% endfor %}
