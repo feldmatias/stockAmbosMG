@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 
@@ -29,4 +30,6 @@ class StockView(View):
                 stock_id = key.lstrip(STOCK_NAME)
                 stock = Stock.repository.get(pk=stock_id)
                 stock.update_stock(int(value))
+
+        messages.success(request, 'Stock actualizado')
         return redirect('stock:stock', id=product_id)

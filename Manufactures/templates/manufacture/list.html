@@ -5,6 +5,7 @@
     {% get_all_products as all_products %}
 
     {% include "manufacture/states_bar.html" with selected=data.state %}
+    {% include "common/flash_messages.html" %}
 
     {% if data.state %}
 
