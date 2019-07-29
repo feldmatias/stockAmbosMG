@@ -1,8 +1,10 @@
 from Manufactures.models import Manufacture
+from Products.decorators.product_bar_decorator import ProductBarDecorator
 
 
-class ManufactureListDecorator:
+class ManufactureListDecorator(ProductBarDecorator):
     def __init__(self, state):
+        super().__init__()
         self.state = state
         self._initialize_manufactures()
 

@@ -2,7 +2,7 @@ from Products.models import Product
 
 
 class ProductBarDecorator:
-    def __init__(self, product):
+    def __init__(self, product=None):
         self.product = product
 
     def all_products(self):

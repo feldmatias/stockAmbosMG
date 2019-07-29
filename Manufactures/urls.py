@@ -1,6 +1,7 @@
 from django.urls import path
 
 from Manufactures.views.manufacture_create_view import ManufactureCreateView
+from Manufactures.views.manufacture_edit_view import ManufactureEditView
 from Manufactures.views.manufacture_list_view import ManufactureListView
 from Manufactures.views.manufacture_delete_view import ManufactureDeleteView
 from Manufactures.views.manufacture_next_state_view import ManufactureNextStateView
@@ -14,4 +15,5 @@ urlpatterns = [
     path('<int:id>/state/next', ManufactureNextStateView.as_view(), name='next-state'),
     path('crear', ManufactureCreateView.as_view(), name='create'),
     path('crear/<int:id>', ManufactureCreateView.as_view(), name='create-product'),
+    path('editar/<int:id>', ManufactureEditView.as_view(), name='edit'),
 ]

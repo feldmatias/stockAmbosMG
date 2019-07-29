@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load state_date_title %}
+{% load static state_date_title %}
 
 {% block content %}
     {% include "manufacture/states_bar.html" with states=data.all_states selected=data.state %}
@@ -9,6 +9,16 @@
         <div class="mx-5 mb-5">
 
             {% if data.manufactures %}
+                <div class="row justify-content-center">
+                    <span class="mr-3 mt-1">Filtrar:</span>
+                    <select onchange="filter_manufactures_by_product(this.value)" class="form-control w-auto mb-3">
+                        <option value="0">Todos</option>
+                        {% for product in data.all_products %}
+                            <option value="{{ product.id }}">{{ product.name|title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
                 <table class="table border border-dark">
                     <thead>
                     <tr>
@@ -25,7 +35,7 @@
 
                     {% for manufacture in data.manufactures %}
 
-                        <tr>
+                        <tr class="manufacture-list-item manufacture-list-item-{{ manufacture.product.id }}">
                             <td class="text-center align-middle border border-dark"
                                 style="font-size: 2.2em">{{ manufacture.product.name|title }}</td>
                             <td class="text-center align-middle border border-dark"
@@ -65,4 +75,5 @@
 
     {% endif %}
 
+    <script src="{% static 'manufactures/list_filter.js' %}"></script>
 {% endblock %}

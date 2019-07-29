@@ -4,7 +4,7 @@
 
     {% include 'common/form_button.html' with url='manufactures:next-state' id=manufacture.id class='btn-outline-secondary btn-sm mb-2' label=state|state_action_next %}
 
-    <button class="btn btn-outline-secondary mb-2 btn-sm">Editar</button>
+    <a  href="{% url 'manufactures:edit' id=manufacture.id %}" class="btn btn-outline-secondary mb-2 btn-sm">Editar</a>
 
     {% include 'common/delete_button.html' with url='manufactures:delete' id=manufacture.id class='btn-outline-secondary btn-sm' %}
 
