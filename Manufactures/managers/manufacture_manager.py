@@ -13,6 +13,18 @@ class ManufactureManager(models.Manager):
         ManufactureValidator.validate(product, size, colors)
 
         manufacture = self.create(product=product, size=size, status=status)
+        self.set_manufacture_colors(manufacture, colors)
 
+    def edit_with_items(self, manufacture, size, status, colors):
+        ManufactureValidator.validate(manufacture.product, size, colors)
+
+        manufacture.size = size
+        manufacture.status = status
+        manufacture.save()
+
+        self.set_manufacture_colors(manufacture, colors)
+
+    def set_manufacture_colors(self, manufacture, colors):
+        manufacture.manufactureitem_set.all().delete()
         for color, value in colors.items():
             model.ManufactureItem.objects.create(color=color, count=value, manufacture=manufacture)

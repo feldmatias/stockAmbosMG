@@ -24,6 +24,7 @@ class ManufactureCreateView(View):
         product = get_object_or_404(Product, pk=kwargs.get('id'))
         size = get_object_or_404(ProductSize, pk=request.POST.get('product-size'))
         status = request.POST.get('status')
+        manufacture_id = request.POST.get('manufacture_id')
 
         colors = {}
         for key, value in request.POST.items():
@@ -34,6 +35,10 @@ class ManufactureCreateView(View):
                 if color_value:
                     colors[color] = color_value
 
-        Manufacture.repository.create_with_items(product, size, status, colors)
+        if manufacture_id:
+            manufacture = get_object_or_404(Manufacture, pk=manufacture_id)
+            Manufacture.repository.edit_with_items(manufacture, size, status, colors)
+        else:
+            Manufacture.repository.create_with_items(product, size, status, colors)
 
         return redirect('manufactures:list', state=status)

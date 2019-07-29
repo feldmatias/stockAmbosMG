@@ -14,6 +14,10 @@
               onsubmit="return validate_manufacture_form()">
             {% csrf_token %}
 
+            {% if data.manufacture %}
+                <input type="hidden" name="manufacture_id" value="{{ data.manufacture.id }}">
+            {% endif %}
+
             <div class="row justify-content-center mt-5" style="font-size: x-large;">
                 <label class="mr-3 col-1 text-right">Estado:</label>
                 <select class="form-control col-2 text-center" name="status" required>
