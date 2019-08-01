@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Base',
+    'Auth',
     'Products',
     'Stock',
     'Manufactures'
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'global_login_required.GlobalLoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'AmbosMG.urls'
@@ -121,5 +123,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-  '/static/',
+    '/static/',
 )
+
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/usuarios/login'
+
+PUBLIC_VIEWS = [
+    'django.contrib.auth.views.LoginView'
+]

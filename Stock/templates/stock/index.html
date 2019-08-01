@@ -3,6 +3,7 @@
 
 {% block content %}
     {% include "products/products_bar.html" with selected=data.product url='stock:stock' %}
+    {% include "common/flash_messages.html" %}
 
     {% if data.product %}
         <div class="text-center mb-3">

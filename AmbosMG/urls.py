@@ -23,5 +23,6 @@ urlpatterns = [
     path('stock/', include('Stock.urls', namespace='stock')),
     path('cortes/', include('Manufactures.urls', namespace='manufactures')),
     path('admin/', admin.site.urls, name='admin'),
+    path('usuarios/', include('django.contrib.auth.urls')),
     path('', BaseView.as_view(), name='default')
 ]
