@@ -45,7 +45,7 @@
             </table>
 
             {% if editable %}
-                <div class="text-center mt-5">
+                <div class="text-center my-5">
                     <a class="btn btn-link" href="{% url 'stock:stock' id=data.product.id %}">Cancelar</a>
                     <input type="submit" class="btn btn-primary" value="Actualizar">
                 </div>
@@ -54,7 +54,7 @@
         </form>
 
         {% if not editable %}
-            <div class="text-center mt-5">
+            <div class="text-center my-5">
                 <a class="btn btn-primary" href="{% url 'stock:stock' id=data.product.id %}?editable=1">Editar</a>
             </div>
         {% endif %}
