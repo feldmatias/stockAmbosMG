@@ -30,12 +30,13 @@
                 </select>
             </div>
 
-            <div class="text-center mt-5" style="font-size: x-large;">
+            <div class="text-center mt-5 {% if data.only_default_size %} d-none {% endif %}" style="font-size: x-large;">
                 <label class="mr-5">Talle:</label>
                 {% for size in data.product.sizes %}
                     <div class="form-check form-check-inline mr-5">
                         <input class="form-check-input mr-2" style="transform:scale(1.5);" type="radio"
-                               name="product-size" value="{{ size.id }}" required {% if size == data.selected_size %}
+                               name="product-size" value="{{ size.id }}" required
+                                {% if size == data.selected_size or data.product.sizes.count == 1 %}
                                checked {% endif %}>
                         <label class="form-check-label">{{ size.size|upper }}</label>
                     </div>

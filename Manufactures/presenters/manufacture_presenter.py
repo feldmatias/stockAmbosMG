@@ -1,3 +1,6 @@
+from Products.models import ProductSize
+
+
 class ManufacturePresenter:
     def __init__(self, product=None, manufacture=None):
         self.product = manufacture.product if manufacture else product
@@ -14,3 +17,7 @@ class ManufacturePresenter:
 
     def selected_size(self):
         return self.manufacture.size if self.manufacture else 0
+
+    def only_default_size(self):
+        sizes = self.product.sizes
+        return sizes.count() == 1 and sizes[0].size == ProductSize.DEFAULT_SIZE

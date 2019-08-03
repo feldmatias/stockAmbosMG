@@ -8,6 +8,8 @@ class ProductSize(models.Model):
         verbose_name = 'talle'
         verbose_name_plural = 'talles'
 
+    DEFAULT_SIZE = '-'
+
     size = models.CharField('talle', max_length=200)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
