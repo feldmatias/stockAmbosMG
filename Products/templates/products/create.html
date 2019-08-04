@@ -3,16 +3,37 @@
 
 {% block content %}
 
+    <h1 class="text-center mt-5 mb-5"><u>{% if view.object %}Editar{% else %}Nuevo{% endif %} producto</u></h1>
+
     <form method="post">
         {% csrf_token %}
 
-        {% bootstrap_form form layout="horizontal" %}
+        <div class="text-center d-flex justify-content-center mb-5">
+            {% bootstrap_form form layout="horizontal" %}
+        </div>
 
-        {% for formset in inlines %}
-            {% include 'common/formset.html' with formset=formset %}
-        {% endfor %}
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <h4>Talles</h4>
+            </div>
+            <div class="col-4">
+                <h4>Colores</h4>
+            </div>
+        </div>
 
-        <input type="submit" value="Submit"/>
+        <div class="row justify-content-center">
+            {% for formset in inlines %}
+                <div class="col-4">
+                    {% include 'common/formset.html' with formset=formset %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center my-5">
+            <a class="btn btn-link" href="{{ view.success_url }}">Cancelar</a>
+            <input type="submit" class="btn btn-primary btn-lg"
+                   value="{% if view.object %}Editar{% else %}Crear{% endif %}">
+        </div>
 
     </form>
 

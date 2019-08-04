@@ -3,6 +3,12 @@
 
 {{ formset.management_form }}
 
+{% if formset.non_form_errors %}
+    <div class="mb-1 text-danger">
+        <b>Debe ingresar al menos {{ formset.min_num }} {{ formset.prefix }}</b>
+    </div>
+{% endif %}
+
 {% for form in formset %}
     <div class="form-inline formset-{{ random_id }} mb-2">
         {% bootstrap_form form layout="horizontal" %}
@@ -16,7 +22,7 @@
             formCssClass: 'dynamic-formset-{{ random_id }}',
             addText: "Agregar {{ formset.prefix }}",
             deleteText: "Eliminar",
-            deleteCssClass: "ml-4"
+            deleteCssClass: "formset-delete-{{ random_id }} ml-4"
         });
     });
 
