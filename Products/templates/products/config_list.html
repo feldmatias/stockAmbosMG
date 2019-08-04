@@ -2,29 +2,6 @@
 
 {% block config_content %}
 
-    <div class="text-center">
-        <a class="btn btn-outline-primary mb-5 btn-lg" href="{% url 'products:create' %}">Nuevo</a>
-    </div>
-
-    <div class="row justify-content-center text-center">
-        <table class="table table-hover w-50">
-
-            {% for product in products %}
-                <tr>
-                    <td scope="row" class="px-5">{{ product|title }}</td>
-
-                    <td scope="row" class="px-5 row justify-content-center">
-                        <a href="{% url 'products:edit' pk=product.id %}" class="btn btn-outline-secondary btn-sm mr-1">Editar</a>
-                        {% include 'common/delete_button.html' with url='products:delete' id=product.id class='btn-outline-secondary btn-sm' %}
-                    </td>
-                </tr>
-            {% endfor %}
-
-            <tr>
-                <td class="p-0" colspan="999"></td>
-            </tr>
-
-        </table>
-    </div>
+    {% include 'config/base_config_list.html' with items=products namespace='products' allow_edit=True %}
 
 {% endblock %}

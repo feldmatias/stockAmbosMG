@@ -10,5 +10,10 @@ def config_items():
             'name': 'Productos',
             'url': 'products:config',
             'active': 'productos/'
+        },
+        {
+            'name': 'Usuarios',
+            'url': 'users:config',
+            'active': 'usuarios/'
         }
     ]

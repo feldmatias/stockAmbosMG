@@ -23,5 +23,6 @@ urlpatterns = [
     path('productos/', include('Products.urls', namespace='products')),
     path('configuracion/', include('Config.urls', namespace='config')),
     path('usuarios/', include('django.contrib.auth.urls')),
+    path('usuarios/', include('Auth.urls', namespace='users')),
     path('', BaseView.as_view(), name='default')
 ]
