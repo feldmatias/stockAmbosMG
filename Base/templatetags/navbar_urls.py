@@ -19,6 +19,6 @@ def navbar_urls():
         {
             'name': 'Configuración',
             'url': 'config:index',
-            'active': 'configuracion/'
+            'active': 'configuracion'
         }
     ]
