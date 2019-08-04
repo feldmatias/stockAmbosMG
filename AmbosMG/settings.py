@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'extra_views',
+    'bootstrap4',
     'Base',
     'Auth',
     'Config',
@@ -132,7 +134,6 @@ LOGIN_URL = '/usuarios/login'
 PUBLIC_VIEWS = [
     'django.contrib.auth.views.LoginView'
 ]
-
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())

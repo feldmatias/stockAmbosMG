@@ -2,6 +2,10 @@
 
 {% block config_content %}
 
+    <div class="text-center">
+        <a class="btn btn-outline-primary mb-5 btn-lg" href="{% url 'products:create' %}">Nuevo</a>
+    </div>
+
     <div class="row justify-content-center text-center">
         <table class="table table-hover w-50">
 
@@ -10,8 +14,8 @@
                     <td scope="row" class="px-5">{{ product|title }}</td>
 
                     <td scope="row" class="px-5 row justify-content-center">
-                        <a  href="" class="btn btn-outline-secondary btn-sm mr-1">Ver</a>
-                        <a  href="" class="btn btn-outline-secondary btn-sm mr-1">Editar</a>
+                        <a href="" class="btn btn-outline-secondary btn-sm mr-1">Ver</a>
+                        <a href="" class="btn btn-outline-secondary btn-sm mr-1">Editar</a>
                         {% include 'common/delete_button.html' with url='products:delete' id=product.id class='btn-outline-secondary btn-sm' %}
                     </td>
                 </tr>
