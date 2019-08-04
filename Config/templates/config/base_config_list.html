@@ -1,0 +1,31 @@
+<div class="text-center">
+    <a class="btn btn-outline-primary mb-5 btn-lg" href="{% url namespace|add:":create" %}">Nuevo</a>
+</div>
+
+<div class="row justify-content-center text-center">
+    <table class="table table-hover w-50">
+
+        {% for item in items %}
+            <tr>
+                <td scope="row" class="px-5">{{ item|title }}</td>
+
+                <td scope="row" class="px-5 row justify-content-center">
+
+                    {% if allow_edit %}
+                        <a href="{% url namespace|add:":edit" pk=item.id %}"
+                           class="btn btn-outline-secondary btn-sm mr-1">Editar</a>
+                    {% endif %}
+
+                    {% if items|length > 1 %}
+                        {% include 'common/delete_button.html' with url=namespace|add:":delete" id=item.id class='btn-outline-secondary btn-sm' %}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+
+        <tr>
+            <td class="p-0" colspan="999"></td>
+        </tr>
+
+    </table>
+</div>

@@ -1,0 +1,7 @@
+{% extends 'config/index.html' %}
+
+{% block config_content %}
+
+    {% include 'config/base_config_list.html' with items=users namespace='users' %}
+
+{% endblock %}

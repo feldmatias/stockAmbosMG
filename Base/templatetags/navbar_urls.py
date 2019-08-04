@@ -18,7 +18,7 @@ def navbar_urls():
         },
         {
             'name': 'Configuración',
-            'url': 'admin:index',
-            'active': 'admin/'
+            'url': 'config:index',
+            'active': 'configuracion'
         }
     ]

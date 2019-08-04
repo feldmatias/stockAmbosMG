@@ -1,0 +1,30 @@
+{% load bootstrap4 random_string %}
+{% random_string as random_id %}
+
+{{ formset.management_form }}
+
+{% if formset.non_form_errors %}
+    <div class="mb-1 text-danger">
+        <b>Debe ingresar al menos {{ formset.min_num }} {{ formset.prefix }}</b>
+    </div>
+{% endif %}
+
+{% for form in formset %}
+    <div class="form-inline formset-{{ random_id }} mb-2">
+        {% bootstrap_form form layout="horizontal" %}
+    </div>
+{% endfor %}
+
+<script type="text/javascript">
+    $(function () {
+        $('.formset-{{ random_id }}').formset({
+            prefix: '{{ formset.prefix }}',
+            formCssClass: 'dynamic-formset-{{ random_id }}',
+            addText: "Agregar {{ formset.prefix }}",
+            deleteText: "Eliminar",
+            deleteCssClass: "formset-delete-{{ random_id }} ml-4"
+        });
+    });
+
+    $('.formset-{{ random_id }} .alert-danger').hide();
+</script>
