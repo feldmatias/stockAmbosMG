@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load config_items %}
+
+{% block content %}
+    {% config_items as items %}
+
+    <h1 class="text-center mt-5"><u>Configuración</u></h1>
+
+    <div class="text-center my-5">
+
+        {% for item in items %}
+            <a class="btn {% if item.active in request.get_full_path %} btn-secondary {% else %} btn-outline-secondary {% endif %} mt-3 mx-3 btn-lg"
+               href="{% url item.url %}">{{ item.name }}</a>
+        {% endfor %}
+
+    </div>
+
+    {% block config_content %}
+    {% endblock %}
+{% endblock %}
