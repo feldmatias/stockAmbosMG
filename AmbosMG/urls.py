@@ -20,6 +20,7 @@ from Base.views.base_view import BaseView
 urlpatterns = [
     path('stock/', include('Stock.urls', namespace='stock')),
     path('cortes/', include('Manufactures.urls', namespace='manufactures')),
+    path('productos/', include('Products.urls', namespace='products')),
     path('configuracion/', include('Config.urls', namespace='config')),
     path('usuarios/', include('django.contrib.auth.urls')),
     path('', BaseView.as_view(), name='default')

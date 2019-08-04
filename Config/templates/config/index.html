@@ -9,11 +9,13 @@
     <div class="text-center my-5">
 
         {% for item in items %}
-            <a class="btn {% if item.active in request.get_full_path %} btn-secondary {% else %} btn-outline-secondary {% endif %} mt-3 mx-3 btn-lg"
+            <a class="btn {% if item.active in request.get_full_path %} btn-secondary {% else %} btn-outline-secondary {% endif %} mx-3 btn-lg"
                href="{% url item.url %}">{{ item.name }}</a>
         {% endfor %}
 
     </div>
+
+    {% include "common/flash_messages.html" %}
 
     {% block config_content %}
     {% endblock %}

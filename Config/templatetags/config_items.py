@@ -8,7 +8,7 @@ def config_items():
     return [
         {
             'name': 'Productos',
-            'url': 'stock:index',
+            'url': 'products:config',
             'active': 'productos/'
         }
     ]
