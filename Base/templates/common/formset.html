@@ -5,7 +5,7 @@
 
 {% if formset.non_form_errors %}
     <div class="mb-1 text-danger">
-        <b>Debe ingresar al menos {{ formset.min_num }} {{ formset.prefix }}</b>
+        <b>Debe ingresar al menos {{ formset.min_num }} {{ formset.prefix }}. Si no corresponde ingresar '-'</b>
     </div>
 {% endif %}
 
