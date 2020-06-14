@@ -19,7 +19,10 @@
                     <th scope="col" class="bg-light text-center border border-dark">Nombre</th>
                     <th scope="col"
                         class="bg-light text-center border border-dark">Access token</th>
+                    <th scope="col"
+                        class="bg-light text-center border border-dark">refresh token</th>
                     <th scope="col" class="bg-light text-center border border-dark">expiration</th>
+                    <th scope="col" class="bg-light text-center border border-dark">updatedn</th>
                 </tr>
                 </thead>
 
@@ -35,7 +38,13 @@
                             {{ user.access_token }}
                         </td>
                         <td class="text-center align-middle border border-dark">
+                            {{ user.refresh_token }}
+                        </td>
+                        <td class="text-center align-middle border border-dark">
                             {{ user.token_expiration }}
+                        </td>
+                        <td class="text-center align-middle border border-dark">
+                            {{ user.token_updated }}
                         </td>
                     </tr>
 
