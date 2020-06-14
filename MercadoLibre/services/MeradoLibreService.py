@@ -14,6 +14,15 @@ class MercadoLibreService:
         params = {'grant_type': 'authorization_code', 'client_id': meli_user.app_id, 'client_secret': meli_user.client_id,
                   'code': code, 'redirect_uri': redirect_url}
 
+        return self.set_user_authorization(meli_user, params)
+
+    def refresh_access_token(self, meli_user):
+        params = {'grant_type': 'refresh_token', 'client_id': meli_user.app_id, 'client_secret': meli_user.client_id,
+                  'refresh_token': meli_user.refresh_token}
+
+        return self.set_user_authorization(meli_user, params)
+
+    def set_user_authorization(self, meli_user, params):
         url = 'https://api.mercadolibre.com/oauth/token'
 
         response = requests.post(url, params=params)
