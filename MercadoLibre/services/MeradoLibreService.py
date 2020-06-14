@@ -19,6 +19,7 @@ class MercadoLibreService:
             return False
 
         self.get_user_id(meli_user)
+        return True
 
     def refresh_access_token(self, meli_user):
         params = {'grant_type': 'refresh_token', 'client_id': meli_user.client_id, 'client_secret': meli_user.client_secret,
