@@ -17,6 +17,6 @@ class CreateMeliUserView(View):
         client_id = request.POST.get('clientId')
 
         user = MeliUser.objects.create_user(name, app_id, client_id)
-        redirect_url = request.build_absolute_uri(reverse('mercadolibre:authorize_user', kwargs={'pk': user.pk}))
+        redirect_url = request.build_absolute_uri(reverse('mercadolibre:authorize_user'))
 
         return redirect(MercadoLibreService().get_authorization_url(user, redirect_url))
