@@ -89,6 +89,15 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
+} if not DEBUG else {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'development.sqlite3',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+    },
 }
 
 # Password validation
