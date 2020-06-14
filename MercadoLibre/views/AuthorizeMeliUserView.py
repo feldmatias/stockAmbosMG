@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.urls import reverse
 from django.views import View
 
@@ -17,7 +17,9 @@ class AuthorizeMeliUserView(View):
         authorized = MercadoLibreService().authorize_user(meli_user, authorization_code, redirect_url)
 
         if authorized:
-            messages.success(request, 'Usuario de Mercado Libre asociado con éxito')
+            messages.success(request, 'Usuario de Mercado Libre asociado con éxito. '
+                                      'Recuerda que debes realizar el mapeo de publicaciones para la '
+                                      'actualización automática del stock.')
         else:
             messages.error(request, 'Ocurrió un error al comunicarse con Mercado Libre')
 

@@ -74,3 +74,23 @@ class MercadoLibreService:
             response = requests.get(url, params=params)
             result[item] = response.json()[0]['body']['title']
         return result
+
+    def get_item_variations(self, meli_item):
+        url = "https://api.mercadolibre.com/items"
+        params = {'access_token': meli_item.meli_user.access_token, 'ids': meli_item.item_id}
+
+        response = requests.get(url, params=params)
+        if response.status_code != 200:
+            return []
+
+        items = response.json()[0]['body']['variations']
+        variations = []
+        for variation in items:
+            data = {
+                'id': variation['id'],
+                'size': list(filter(lambda x: x['id'] == 'SIZE', variation['attribute_combinations']))[0]['value_name'],
+                'color': list(filter(lambda x: x['id'] == 'COLOR', variation['attribute_combinations']))[0]['value_name'],
+            }
+            variations.append(data)
+
+        return variations
