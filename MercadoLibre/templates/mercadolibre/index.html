@@ -3,15 +3,55 @@
 {% block content %}
 
     <div class="text-center my-5">
-
-        {#    <a class="btn {% if state.0 == selected %} btn-secondary {% else %} btn-outline-secondary {% endif %} mt-3 mx-3 btn-lg"#}
-        {#           href="{% url 'manufactures:list' state=state.0 %}">{{ state.1|title }}</a>#}
-
-        <a class="btn btn-outline-primary mt-3 mx-3 btn-lg" href="{% url 'mercadolibre:create_user' %}">Nuevo Usuario</a>
-
+        <a class="btn btn-outline-primary mt-3 mx-3 btn-lg" href="{% url 'mercadolibre:create_user' %}">Nuevo
+            Usuario</a>
     </div>
 
-
     {% include "common/flash_messages.html" %}
+
+    <div class="mx-5 mb-5">
+
+        {% if data.users %}
+
+            <table class="table border border-dark">
+                <thead>
+                <tr>
+                    <th scope="col" class="bg-light text-center border border-dark">Nombre</th>
+                    <th scope="col"
+                        class="bg-light text-center border border-dark">Access token</th>
+                    <th scope="col" class="bg-light text-center border border-dark">expiration</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                {% for user in data.users %}
+
+                    <tr>
+                        <td class="text-center align-middle border border-dark">
+                            {{ user.name|title }}
+                        </td>
+                        <td class="text-center align-middle border border-dark">
+                            {{ user.access_token }}
+                        </td>
+                        <td class="text-center align-middle border border-dark">
+                            {{ user.token_expiration|date:'d / m / y' }}
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+        {% else %}
+
+            <div class="text-center font-italic text-primary h1">
+                No hay usuarios asociados con Mercado Libre
+            </div>
+
+        {% endif %}
+
+    </div>
 
 {% endblock %}

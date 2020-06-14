@@ -8,3 +8,6 @@ class MeliUserManager(models.Manager):
 
     def for_authorization(self):
         return self.filter(access_token__isnull=True).last()  # TODO: find a better way to identify the user to authorize
+
+    def authorized(self):
+        return self.filter(access_token__isnull=False)
