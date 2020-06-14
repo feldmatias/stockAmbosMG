@@ -12,7 +12,7 @@
                 <li>Dirigirse a la página de <a href="https://developers.mercadolibre.com.ar/devcenter" target="_blank">Mercado
                     Libre</a> para crear una aplicación
                 </li>
-                <li>En 'Redirect URI' ingresar lo siguiente: {{ request.META.HTTP_HOST }}
+                <li>En 'Redirect URI' ingresar lo siguiente: https://{{ request.META.HTTP_HOST }}
                 </li>
                 <li>En 'Scopes' seleccionar todas las opciones. (read, offline access, write)
                 </li>
