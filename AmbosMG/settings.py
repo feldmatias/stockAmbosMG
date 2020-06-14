@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'Stock',
     'Manufactures',
     'MercadoLibre',
+    'Test',
 ]
 
 MIDDLEWARE = [
@@ -142,7 +143,8 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/usuarios/login'
 
 PUBLIC_VIEWS = [
-    'django.contrib.auth.views.LoginView'
+    'django.contrib.auth.views.LoginView',
+    'Test.views.MeliNotificationsView'
 ]
 
 # Activate Django-Heroku.
