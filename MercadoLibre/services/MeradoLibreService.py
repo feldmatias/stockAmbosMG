@@ -67,4 +67,10 @@ class MercadoLibreService:
             return []
 
         items = response.json()['results']
-        return items
+        result = {}
+        for item in items:
+            url = "https://api.mercadolibre.com/items"
+            params['ids'] = item
+            response = requests.get(url, params=params)
+            result[item] = response.json()[0]['body']['title']
+        return result

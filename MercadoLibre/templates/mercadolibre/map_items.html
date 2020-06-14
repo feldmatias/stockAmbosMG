@@ -6,6 +6,10 @@
 
     <h1 class="text-center mt-5"><u>Mapear Publicaciones</u></h1>
 
+    <div class="d-flex justify-content-center">
+        <span>Seleccione para cada publicación a cual producto corresponde. Si no hay ninguno elegir '-'</span>
+    </div>
+
     <form method="POST" action="{% url 'mercadolibre:map_items' user_id=data.user.id %}">
         {% csrf_token %}
 
@@ -15,10 +19,11 @@
                     {% with current_map=data.items|get_item:item %}
                         <div class="justify-content-center">
                             <div class="form-group row">
-                                <label class="col-5 col-form-label text-right">{{ item }}</label>
-                                <select class="form-control col-3 text-center" name="product-{{ item }}" required>
+                                <label class="col-5 col-form-label text-right">{{ data.item_titles|get_item:item|title }}</label>
+                                <select class="form-control col-3 text-center" name="item-{{ item }}" required>
                                     <option value="0" {% if not current_map.product %}
-                                                selected {% endif %}> - </option>
+                                            selected {% endif %}> -
+                                    </option>
                                     {% for product in all_products %}
                                         <option value="{{ product.id }}" {% if product.id == current_map.product.id %}
                                                 selected {% endif %}>{{ product.name|title }}</option>

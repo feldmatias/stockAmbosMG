@@ -11,7 +11,7 @@ class MapMeliItemsPresenter:
 
     def initialize_items(self):
         items = {}
-        for item in self.meli_items:
+        for item in self.meli_items.keys():
             items[item] = MeliItem.objects.find_or_create(item_id=item, meli_user=self.user)
         self.all_items = items
 
@@ -19,6 +19,9 @@ class MapMeliItemsPresenter:
         return self.user
 
     def item_ids(self):
+        return self.meli_items.keys()
+
+    def item_titles(self):
         return self.meli_items
 
     def items(self):
