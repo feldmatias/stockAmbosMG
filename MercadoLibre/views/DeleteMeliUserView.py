@@ -14,4 +14,4 @@ class DeleteMeliUserView(View):
         user.delete()
         messages.success(request, 'Usuario eliminado con éxito')
 
-        return redirect('mercadolibre:config')
+        return redirect('mercadolibre:index')
