@@ -31,8 +31,7 @@
                             {{ user.name|title }}
                         </td>
                         <td class="text-center align-middle border border-dark">
-                            <a href="{% url 'mercadolibre:map_items' user_id=user.id %}"
-                               class="btn btn-outline-secondary mb-2 btn-sm">Mapear Publicaciones</a>
+                            {% include 'mercadolibre/actions.html' with user=user %}
                         </td>
                     </tr>
 
