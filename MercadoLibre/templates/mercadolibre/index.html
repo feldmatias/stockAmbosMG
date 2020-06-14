@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="text-center my-5">
+
+        {#    <a class="btn {% if state.0 == selected %} btn-secondary {% else %} btn-outline-secondary {% endif %} mt-3 mx-3 btn-lg"#}
+        {#           href="{% url 'manufactures:list' state=state.0 %}">{{ state.1|title }}</a>#}
+
+        <a class="btn btn-outline-primary mt-3 mx-3 btn-lg" href="{% url 'mercadolibre:create_user' %}">Nuevo
+            Usuario</a>
+
+    </div>
+
+
+    {% include "common/flash_messages.html" %}
+
+{% endblock %}
