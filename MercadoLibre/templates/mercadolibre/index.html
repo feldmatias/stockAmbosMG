@@ -18,33 +18,21 @@
                 <tr>
                     <th scope="col" class="bg-light text-center border border-dark">Nombre</th>
                     <th scope="col"
-                        class="bg-light text-center border border-dark">Access token</th>
-                    <th scope="col"
-                        class="bg-light text-center border border-dark">refresh token</th>
-                    <th scope="col" class="bg-light text-center border border-dark">expiration</th>
-                    <th scope="col" class="bg-light text-center border border-dark">user id</th>
+                        class="bg-light text-center border border-dark">Acciones
+                    </th>
                 </tr>
                 </thead>
 
                 <tbody>
 
                 {% for user in data.users %}
-
                     <tr>
                         <td class="text-center align-middle border border-dark">
                             {{ user.name|title }}
                         </td>
                         <td class="text-center align-middle border border-dark">
-                            {{ user.access_token }}
-                        </td>
-                        <td class="text-center align-middle border border-dark">
-                            {{ user.refresh_token }}
-                        </td>
-                        <td class="text-center align-middle border border-dark">
-                            {{ user.token_expiration }}
-                        </td>
-                        <td class="text-center align-middle border border-dark">
-                            {{ user.user_id }}
+                            <a href="{% url 'mercadolibre:map_items' user_id=user.id %}"
+                               class="btn btn-outline-secondary mb-2 btn-sm">Mapear Publicaciones</a>
                         </td>
                     </tr>
 
