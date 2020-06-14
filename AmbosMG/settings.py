@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'Config',
     'Products',
     'Stock',
-    'Manufactures'
+    'Manufactures',
+    'MercadoLibre',
 ]
 
 MIDDLEWARE = [
