@@ -57,3 +57,14 @@ class MercadoLibreService:
         user_id = response.json()['id']
         meli_user.set_user_id(user_id)
         return True
+
+    def get_items(self, meli_user):
+        url = f"https://api.mercadolibre.com/users/{meli_user.user_id}/items/search"
+        params = {'access_token': meli_user.access_token}
+
+        response = requests.get(url, params=params)
+        if response.status_code != 200:
+            return []
+
+        items = response.json()['results']
+        return items

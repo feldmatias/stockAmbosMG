@@ -1,1 +1,2 @@
-from .meli_user import MeliUser
+from .MeliUser import MeliUser
+from .MeliItem import MeliItem
