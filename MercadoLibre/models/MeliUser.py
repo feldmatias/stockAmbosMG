@@ -30,3 +30,7 @@ class MeliUser(models.Model):
     def set_user_id(self, user_id):
         self.user_id = user_id
         self.save()
+
+    @property
+    def items(self):
+        return self.meliitem_set.all()

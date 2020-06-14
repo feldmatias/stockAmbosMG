@@ -30,7 +30,7 @@ class MapMeliItemsView(View):
                 product = get_object_or_404(Product, pk=value) if int(value) else None
                 MeliItem.objects.set_item_product(user_id, item_id, product)
 
-        MeliItem.objects.automatic_variations_mapping(user_id)
+        MeliUser.objects.automatic_variations_mapping(user_id)
 
         messages.success(request, 'Publicaciones mapeadas correctamente')
         return redirect('mercadolibre:index')

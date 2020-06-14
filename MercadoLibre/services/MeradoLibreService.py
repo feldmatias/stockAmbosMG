@@ -69,11 +69,15 @@ class MercadoLibreService:
         items = response.json()['results']
         result = {}
         for item in items:
-            url = "https://api.mercadolibre.com/items"
-            params['ids'] = item
-            response = requests.get(url, params=params)
-            result[item] = response.json()[0]['body']['title']
+            result[item] = self.get_item_title(meli_user, item)
         return result
+
+    def get_item_title(self, meli_user, item):
+        url = "https://api.mercadolibre.com/items"
+        params = {'access_token': meli_user.access_token, 'ids': item}
+
+        response = requests.get(url, params=params)
+        return response.json()[0]['body']['title']
 
     def get_item_variations(self, meli_item):
         url = "https://api.mercadolibre.com/items"

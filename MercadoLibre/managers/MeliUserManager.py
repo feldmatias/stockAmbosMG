@@ -11,3 +11,9 @@ class MeliUserManager(models.Manager):
 
     def authorized(self):
         return self.filter(access_token__isnull=False)
+
+    def automatic_variations_mapping(self, meli_user_id):
+        from MercadoLibre.models import MeliItemMapping
+        user = self.get(pk=meli_user_id)
+        for item in user.items:
+            MeliItemMapping.objects.automatic_mapping(item)

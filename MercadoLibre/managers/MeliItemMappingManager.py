@@ -6,6 +6,9 @@ from Products.models import ProductSize, ProductColor
 
 class MeliItemMappingManager(models.Manager):
 
+    def find_for(self, item, size, color):
+        return self.filter(meli_item=item, color=color, size=size).first()
+
     def automatic_mapping(self, meli_item):
         if not meli_item.product:
             self.filter(meli_item=meli_item).delete()
