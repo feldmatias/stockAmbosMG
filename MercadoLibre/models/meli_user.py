@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from django.db import models
 
 from MercadoLibre.managers.MeliUserManager import MeliUserManager
@@ -18,3 +20,10 @@ class MeliUser(models.Model):
 
     def __str__(self):
         return self.name
+
+    def set_access_token(self, access_token, refresh_token, token_expires_in):
+        self.access_token = access_token
+        self.refresh_token = refresh_token
+        self.token_updated = datetime.now()
+        self.token_expiration = datetime.now() + timedelta(seconds=token_expires_in)
+        self.save()

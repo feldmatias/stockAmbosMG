@@ -1,3 +1,6 @@
+certifi==2020.4.5.2
+chardet==3.0.4
+configparser==5.0.0
 dj-database-url==0.5.0
 Django==2.2.3
 django-bootstrap4==0.0.8
@@ -6,8 +9,11 @@ django-glrm==1.1.3
 django-heroku==0.3.1
 django-model-utils==3.2.0
 gunicorn==19.9.0
-psycopg2==2.8.3
+idna==2.9
+psycopg2==2.8.5
 pytz==2019.1
+requests==2.23.0
 six==1.12.0
 sqlparse==0.3.0
+urllib3==1.25.9
 whitenoise==4.1.3
