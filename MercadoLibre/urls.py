@@ -6,7 +6,6 @@ from MercadoLibre.views.DeleteMeliUserView import DeleteMeliUserView
 from MercadoLibre.views.MapMeliItemVariationsView import MapMeliItemVariationsView
 from MercadoLibre.views.MapMeliItemsView import MapMeliItemsView
 from MercadoLibre.views.MeliIndexView import MeliIndexView
-from Test.views import MeliNotificationsView
 
 app_name = 'mercadolibre'
 
@@ -17,5 +16,4 @@ urlpatterns = [
     path('usuarios/eliminar/<int:id>', DeleteMeliUserView.as_view(), name='delete_user'),
     path('publicaciones/mapear/<int:user_id>', MapMeliItemsView.as_view(), name='map_items'),
     path('publicaciones/mapear_talles_colores/<int:user_id>', MapMeliItemVariationsView.as_view(), name='map_item_variations'),
-    path('notificaciones/', MeliNotificationsView.as_view(), name='notifications'),
 ]
