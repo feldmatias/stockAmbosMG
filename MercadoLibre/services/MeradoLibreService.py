@@ -1,4 +1,3 @@
-import threading
 from urllib.parse import urlencode
 
 import requests
@@ -109,22 +108,15 @@ class MercadoLibreService:
 
     def update_stock(self, stock):
         from MercadoLibre.models import MeliItemMapping
-        mappings = MeliItemMapping.objects.get_all_for(stock.color, stock.size).select_related('meli_item')
-        items = {}
+        mappings = MeliItemMapping.objects.get_all_for(stock.color, stock.size).select_related('meli_item',
+                                                                                               'meli_item__product',
+                                                                                               'meli_item__meli_user')
         for mapping in mappings:
             item = mapping.meli_item
             variation_id = mapping.item_id
-            ids = items.get(item, [])
-            ids.append(variation_id)
-            items[item] = ids
 
-        for item, variations in items.items():
-            self.check_access_token(item.meli_user)
-            url = f"https://api.mercadolibre.com/items/{item.item_id}?access_token={item.meli_user.access_token}"
-            variation_ids = [{"id": variation, "available_quantity": stock.stock} for variation in variations]
-            other_variation_ids = [{"id": mapping.item_id} for mapping in item.mappings if mapping.item_id not in variations]
-
+            url = f"https://api.mercadolibre.com/items/{item.item_id}/variations/{variation_id}?access_token={item.meli_user.access_token}"
             for i in range(50):
-                response = requests.put(url, json={'variations': variation_ids + other_variation_ids})
+                response = requests.put(url, json={"available_quantity": stock.stock})
                 if response.status_code == 200:
                     break
