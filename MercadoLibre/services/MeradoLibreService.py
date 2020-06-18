@@ -1,8 +1,7 @@
+import threading
 from urllib.parse import urlencode
 
 import requests
-
-from MercadoLibre.models import MeliItemMapping
 
 
 class MercadoLibreService:
@@ -109,6 +108,7 @@ class MercadoLibreService:
         return variations
 
     def update_stock(self, stock):
+        from MercadoLibre.models import MeliItemMapping
         mappings = MeliItemMapping.objects.get_all_for(stock.color, stock.size).select_related('meli_item')
         items = {}
         for mapping in mappings:
@@ -121,12 +121,10 @@ class MercadoLibreService:
         for item, variations in items.items():
             self.check_access_token(item.meli_user)
             url = f"https://api.mercadolibre.com/items/{item.item_id}?access_token={item.meli_user.access_token}"
-            data = {
-                "variations": [
-                    {
-                        "id": variation,
-                        "available_quantity": stock.stock
-                    } for variation in variations
-                ],
-            }
-            requests.put(url, json=data)
+            variation_ids = [{"id": variation, "available_quantity": stock.stock} for variation in variations]
+            other_variation_ids = [{"id": mapping.item_id} for mapping in item.mappings if mapping.item_id not in variations]
+
+            for i in range(50):
+                response = requests.put(url, json={'variations': variation_ids + other_variation_ids})
+                if response.status_code == 200:
+                    break

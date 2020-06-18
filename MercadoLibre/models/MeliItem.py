@@ -11,3 +11,7 @@ class MeliItem(models.Model):
     meli_user = models.ForeignKey(MeliUser, on_delete=models.CASCADE)
 
     objects = MeliItemManager()
+
+    @property
+    def mappings(self):
+        return self.meliitemmapping_set.all()
