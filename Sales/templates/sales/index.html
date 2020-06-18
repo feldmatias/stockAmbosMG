@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load get_sale_types %}
+{% load get_sale_types dictionary_get_item %}
 
 {% block content %}
     {% get_sale_types as sale_types %}
@@ -10,12 +10,12 @@
 
     <div class="mx-5 my-5 row justify-content-center text-center">
 
-        {% if sales %}
+        {% if data.sales %}
 
             <table class="table table-hover w-50">
                 <thead>
                 <tr>
-                    <th scope="col" class="bg-light text-center">Fecha</th>
+                    <th scope="col" class="bg-light text-center"></th>
                     {% for type in sale_types %}
                         <th scope="col"
                             class="bg-light text-center">{{ type.1 }}
@@ -26,7 +26,21 @@
 
                 <tbody>
 
-                {% for sale in sales %}
+                <tr>
+                    <td class="text-center align-middle">
+                        <b>Total del mes</b>
+                    </td>
+                    {% for type in sale_types %}
+                        <td class="text-center align-middle">
+                            ${{ data.totals|get_item:type.0 }}
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td colspan="100" class="bg-light"></td>
+                </tr>
+
+                {% for sale in data.sales %}
                     <tr>
                         <td class="text-center align-middle">
                             {{ sale.date|date:'d/m' }}

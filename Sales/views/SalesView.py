@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.views import View
 
 from Sales.models import Sale
+from Sales.presenters.SalesPresenter import SalesPresenter
 
 
 class SalesView(View):
@@ -19,7 +20,7 @@ class SalesView(View):
         sales = Sale.objects.for_month(int(month), int(year))
 
         data = {
-            'sales': sales
+            'data': SalesPresenter(sales)
         }
         return render(request, 'sales/index.html', data)
 
