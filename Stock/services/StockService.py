@@ -1,6 +1,5 @@
 import threading
 
-from MercadoLibre.services.MeradoLibreService import MercadoLibreService
 from Stock.models import Stock
 
 
@@ -25,4 +24,5 @@ class StockService:
 
 
 def update_stock_meli(stock):
+    from MercadoLibre.services.MeradoLibreService import MercadoLibreService
     MercadoLibreService().update_stock(stock)
