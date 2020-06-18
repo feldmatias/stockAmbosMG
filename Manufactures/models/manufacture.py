@@ -4,7 +4,7 @@ from model_utils.models import StatusModel
 
 from Manufactures.managers import ManufactureManager
 from Products.models import ProductSize, Product
-from Stock.models import Stock
+from Stock.services.StockService import StockService
 
 
 class Manufacture(StatusModel):
@@ -41,5 +41,5 @@ class Manufacture(StatusModel):
         self.save()
 
     def finish(self):
-        Stock.repository.update_stock_from_manufacture(self)
+        StockService().update_stock_from_manufacture(self)
         self.delete()

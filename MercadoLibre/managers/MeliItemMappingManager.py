@@ -26,3 +26,6 @@ class MeliItemMappingManager(models.Manager):
 
             if color and size:
                 self.create(item_id=variation['id'], meli_item=meli_item, color=color, size=size)
+
+    def get_all_for(self, color, size):
+        return self.filter(color=color, size=size).all()

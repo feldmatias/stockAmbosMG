@@ -2,6 +2,8 @@ from urllib.parse import urlencode
 
 import requests
 
+from MercadoLibre.models import MeliItemMapping
+
 
 class MercadoLibreService:
 
@@ -11,7 +13,8 @@ class MercadoLibreService:
         return url
 
     def authorize_user(self, meli_user, code, redirect_url):
-        params = {'grant_type': 'authorization_code', 'client_id': meli_user.client_id, 'client_secret': meli_user.client_secret,
+        params = {'grant_type': 'authorization_code', 'client_id': meli_user.client_id,
+                  'client_secret': meli_user.client_secret,
                   'code': code, 'redirect_uri': redirect_url}
 
         authorized = self.set_user_authorization(meli_user, params)
@@ -22,7 +25,8 @@ class MercadoLibreService:
         return True
 
     def refresh_access_token(self, meli_user):
-        params = {'grant_type': 'refresh_token', 'client_id': meli_user.client_id, 'client_secret': meli_user.client_secret,
+        params = {'grant_type': 'refresh_token', 'client_id': meli_user.client_id,
+                  'client_secret': meli_user.client_secret,
                   'refresh_token': meli_user.refresh_token}
 
         return self.set_user_authorization(meli_user, params)
@@ -60,6 +64,7 @@ class MercadoLibreService:
         return True
 
     def get_items(self, meli_user):
+        self.check_access_token(meli_user)
         url = f"https://api.mercadolibre.com/users/{meli_user.user_id}/items/search"
         params = {'access_token': meli_user.access_token}
 
@@ -74,6 +79,7 @@ class MercadoLibreService:
         return result
 
     def get_item_title(self, meli_user, item):
+        self.check_access_token(meli_user)
         url = "https://api.mercadolibre.com/items"
         params = {'access_token': meli_user.access_token, 'ids': item}
 
@@ -81,6 +87,7 @@ class MercadoLibreService:
         return response.json()[0]['body']['title']
 
     def get_item_variations(self, meli_item):
+        self.check_access_token(meli_item.meli_user)
         url = "https://api.mercadolibre.com/items"
         params = {'access_token': meli_item.meli_user.access_token, 'ids': meli_item.item_id}
 
@@ -94,8 +101,32 @@ class MercadoLibreService:
             data = {
                 'id': variation['id'],
                 'size': list(filter(lambda x: x['id'] == 'SIZE', variation['attribute_combinations']))[0]['value_name'],
-                'color': list(filter(lambda x: x['id'] == 'COLOR', variation['attribute_combinations']))[0]['value_name'],
+                'color': list(filter(lambda x: x['id'] == 'COLOR', variation['attribute_combinations']))[0][
+                    'value_name'],
             }
             variations.append(data)
 
         return variations
+
+    def update_stock(self, stock):
+        mappings = MeliItemMapping.objects.get_all_for(stock.color, stock.size).select_related('meli_item')
+        items = {}
+        for mapping in mappings:
+            item = mapping.meli_item
+            variation_id = mapping.item_id
+            ids = items.get(item, [])
+            ids.append(variation_id)
+            items[item] = ids
+
+        for item, variations in items.items():
+            self.check_access_token(item.meli_user)
+            url = f"https://api.mercadolibre.com/items/{item.item_id}?access_token={item.meli_user.access_token}"
+            data = {
+                "variations": [
+                    {
+                        "id": variation,
+                        "available_quantity": stock.stock
+                    } for variation in variations
+                ],
+            }
+            requests.put(url, json=data)

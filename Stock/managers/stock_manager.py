@@ -15,8 +15,3 @@ class StockManager(models.Manager):
     def find_or_create(self, color, size):
         stock = self.filter(color=color, size=size).first()
         return stock if stock is not None else self.create(color, size)
-
-    def update_stock_from_manufacture(self, manufacture):
-        for item in manufacture.items():
-            stock = self.find_or_create(item.color, manufacture.size)
-            stock.add_stock(item.count)
