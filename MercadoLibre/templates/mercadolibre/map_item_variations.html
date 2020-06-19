@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load dictionary_get_item %}
+
+{% block content %}
+
+    <h1 class="text-center mt-5"><u>Mapear Talles y Colores</u></h1>
+
+    <div class="d-flex justify-content-center">
+        <span>El mapeo de talles y colores se hace automáticamente.</span>
+    </div>
+    <div class="d-flex justify-content-center">
+        <span>Para eso, es necesario que los nombres de los talles y colores sean iguales en las publicaciones y en el stock.</span>
+    </div>
+    <div class="d-flex justify-content-center">
+        <span>A continuacion se muestran todos los talles y colores que no han podido ser mapeados a una publicación. (No existe o el nombre no concide)</span>
+    </div>
+
+    <div class="mx-5 mt-5 d-flex justify-content-center">
+        <div class="mx-5 w-50">
+            {% for missing in data.missing_mappings %}
+                <div>
+                    <div>
+                        <span>{{ missing|get_item:"item"|title }} - Talle: {{ missing|get_item:"size"|upper }} - Color: {{ missing|get_item:"color"|title }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% include "common/flash_messages.html" %}
+
+    <form method="POST" action="{% url 'mercadolibre:map_item_variations' user_id=data.user.id %}">
+        {% csrf_token %}
+
+        <div class="text-center my-5">
+            <a class="btn btn-link" href="{% url 'mercadolibre:index' %}">Cancelar</a>
+            <input type="submit" class="btn btn-primary btn-lg" value="Actualizar">
+        </div>
+
+    </form>
+
+{% endblock %}

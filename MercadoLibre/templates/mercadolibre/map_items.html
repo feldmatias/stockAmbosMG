@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load get_all_products dictionary_get_item %}
+
+{% block content %}
+    {% get_all_products as all_products %}
+
+    <h1 class="text-center mt-5"><u>Mapear Publicaciones</u></h1>
+
+    <div class="d-flex justify-content-center">
+        <span>Seleccione para cada publicación a cual producto corresponde. Si no hay ninguno elegir '-'</span>
+    </div>
+
+    <form method="POST" action="{% url 'mercadolibre:map_items' user_id=data.user.id %}">
+        {% csrf_token %}
+
+        <div class="text-center mx-5 mt-5">
+            <div class="mx-5 justify-content-center">
+                {% for item in data.item_ids %}
+                    {% with current_map=data.items|get_item:item %}
+                        <div class="justify-content-center">
+                            <div class="form-group row">
+                                <label class="col-5 col-form-label text-right">{{ data.item_titles|get_item:item|title }}</label>
+                                <select class="form-control col-3 text-center" name="item-{{ item }}" required>
+                                    <option value="0" {% if not current_map.product %}
+                                            selected {% endif %}> -
+                                    </option>
+                                    {% for product in all_products %}
+                                        <option value="{{ product.id }}" {% if product.id == current_map.product.id %}
+                                                selected {% endif %}>{{ product.name|title }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    {% endwith %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="text-center my-5">
+            <a class="btn btn-link" href="{% url 'mercadolibre:index' %}">Cancelar</a>
+            <input type="submit" class="btn btn-primary btn-lg" value="Guardar">
+        </div>
+
+    </form>
+
+{% endblock %}

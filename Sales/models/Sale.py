@@ -9,10 +9,10 @@ class Sale(models.Model):
     TYPES = Choices(
         ('1', 'Prendas Correo'),
         ('2', 'Prendas Malabia'),
-        ('3', 'Retiros Luli'),
+        ('3', 'Banco Luli'),
         ('4', 'Semana Luli'),
         ('5', 'Retiros Dylan'),
-        ('6', 'Semana Dylan'),
+        ('6', 'Banco Dylan'),
     )
 
     value = models.IntegerField()

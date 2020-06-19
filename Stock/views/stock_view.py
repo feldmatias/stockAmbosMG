@@ -5,11 +5,14 @@ from django.views import View
 from Products.models import Product
 from Stock.presenters.product_stock_presenter import ProductStockPresenter
 from Stock.models import Stock
+from Stock.services.StockService import StockService
 
 STOCK_NAME = 'stock-'
 
 
 class StockView(View):
+
+    service = StockService()
 
     def get(self, request, *args, **kwargs):
         product_id = kwargs.get('id', 0)
@@ -28,8 +31,7 @@ class StockView(View):
         for key, value in request.POST.items():
             if STOCK_NAME in key:
                 stock_id = key.lstrip(STOCK_NAME)
-                stock = Stock.repository.get(pk=stock_id)
-                stock.update_stock(int(value))
+                self.service.update_stock(stock_id, int(value))
 
         messages.success(request, 'Stock actualizado')
         return redirect('stock:stock', id=product_id)

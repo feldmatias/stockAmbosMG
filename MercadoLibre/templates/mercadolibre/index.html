@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1 class="text-center mt-5"><u>Mercado Libre</u></h1>
+
+    <div class="text-center mb-5">
+        <a class="btn btn-outline-primary mt-3 mx-3 btn-lg" href="{% url 'mercadolibre:create_user' %}">Nuevo
+            Usuario</a>
+    </div>
+
+    {% include "common/flash_messages.html" %}
+
+    <div class="mx-5 mb-5 row justify-content-center text-center">
+
+        {% if data.users %}
+
+            <table class="table table-hover w-50">
+                <thead>
+                <tr>
+                    <th scope="col" class="bg-light text-center">Nombre</th>
+                    <th scope="col"
+                        class="bg-light text-center">Acciones
+                    </th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                {% for user in data.users %}
+                    <tr>
+                        <td class="text-center align-middle">
+                            {{ user.name|title }}
+                        </td>
+                        <td class="text-center align-middle">
+                            {% include 'mercadolibre/actions.html' with user=user %}
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+        {% else %}
+
+            <div class="text-center font-italic text-primary h1">
+                No hay usuarios asociados con Mercado Libre
+            </div>
+
+        {% endif %}
+
+    </div>
+
+{% endblock %}

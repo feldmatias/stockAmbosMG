@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1 class="text-center my-5"><u>Nuevo usuario de Mercado Libre</u></h1>
+
+    <form method="POST" action="{% url 'mercadolibre:create_user' %}">
+        {% csrf_token %}
+
+        <div class="form-group row justify-content-center mb-5">
+            <ul>
+                <li>Dirigirse a la página de <a href="https://developers.mercadolibre.com.ar/devcenter" target="_blank">Mercado
+                    Libre</a> para crear una aplicación
+                </li>
+                <li>En nombre y descripcion poner cualquier valor</li>
+                <li>En 'Redirect URI' ingresar lo siguiente: https://{{ request.META.HTTP_HOST }}{% url 'mercadolibre:authorize_user' %}
+                </li>
+                <li>En 'Scopes' seleccionar todas las opciones. (read, offline access, write)
+                </li>
+                <li>En 'Topics' no seleccionar nada
+                </li>
+                <li>Crear la aplicación
+                </li>
+                <li>Obtener el ID y el Secret key e ingresarlos a continuación
+                </li>
+            </ul>
+        </div>
+
+        <div class="form-group row justify-content-center">
+            <label for="inputUser" class="col-1 col-form-label">Nombre</label>
+            <div class="col-3">
+                <input type="text" class="form-control" id="inputUser" name="name" placeholder="Nombre"
+                       autocomplete="off" required>
+            </div>
+        </div>
+
+        <div class="form-group row justify-content-center">
+            <label for="clientId" class="col-1 col-form-label">Id</label>
+            <div class="col-3">
+                <input type="text" class="form-control" id="clientId" name="clientId" placeholder="ID"
+                       autocomplete="off" required>
+            </div>
+        </div>
+
+        <div class="form-group row justify-content-center">
+            <label for="clientSecret" class="col-1 col-form-label">Clave Secreta</label>
+            <div class="col-3">
+                <input type="text" class="form-control" id="clientSecret" name="clientSecret" placeholder="Secret Key"
+                       autocomplete="off" required>
+            </div>
+        </div>
+
+        <div class="text-center my-5">
+            <a class="btn btn-link" href="{% url 'mercadolibre:index' %}">Cancelar</a>
+            <input type="submit" class="btn btn-primary btn-lg" value="Crear">
+        </div>
+
+    </form>
+
+{% endblock %}

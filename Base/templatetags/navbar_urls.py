@@ -24,6 +24,11 @@ def navbar_urls():
         {
             'name': 'Configuración',
             'url': 'config:index',
-            'active': 'configuracion'
-        }
+            'active': 'configuracion/'
+        },
+        {
+            'name': 'Mercado Libre',
+            'url': 'mercadolibre:index',
+            'active': 'mercadolibre/'
+        },
     ]
