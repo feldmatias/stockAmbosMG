@@ -5,12 +5,14 @@ from Sales.managers.SaleManager import SaleManager
 
 
 class Sale(models.Model):
-    TYPE_SALE = 'venta'
-    TYPE_WITHDRAWAL = 'retiro'
 
     TYPES = Choices(
-        (TYPE_SALE, 'Venta'),
-        (TYPE_WITHDRAWAL, 'Retiro'),
+        ('1', 'Prendas Correo'),
+        ('2', 'Prendas Malabia'),
+        ('3', 'Retiros Luli'),
+        ('4', 'Semana Luli'),
+        ('5', 'Retiros Dylan'),
+        ('5', 'Semana Dylan'),
     )
 
     value = models.IntegerField()

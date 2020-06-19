@@ -5,7 +5,7 @@
     {% get_sale_types as sale_types %}
     {% get_months as months %}
 
-    <h1 class="text-center my-5"><u>Ventas</u></h1>
+    <h1 class="text-center my-5"><u>Detalle</u></h1>
 
     <form method="GET" class="my-4 text-center form-inline justify-content-center">
         <div class="form-row justify-content-center">
@@ -49,7 +49,7 @@
                     </td>
                     {% for type in sale_types %}
                         <td class="text-center align-middle">
-                            ${{ data.totals|get_item:type.0|default_if_none:0 }}
+                            {{ data.totals|get_item:type.0|default_if_none:0 }}
                         </td>
                     {% endfor %}
                 </tr>
@@ -65,7 +65,7 @@
                         {% for type in sale_types %}
                             <td class="text-center align-middle">
                                 {% if sale.type == type.0 %}
-                                    ${{ sale.value }}
+                                    {{ sale.value }}
                                 {% endif %}
                             </td>
                         {% endfor %}

@@ -17,9 +17,9 @@ def navbar_urls():
             'active': 'cortes/'
         },
         {
-            'name': 'Ventas',
+            'name': 'Detalle',
             'url': 'sales:index',
-            'active': 'ventas'
+            'active': 'detalle'
         },
         {
             'name': 'Configuración',
