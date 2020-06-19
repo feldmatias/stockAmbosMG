@@ -12,9 +12,14 @@
                 <li>Dirigirse a la página de <a href="https://developers.mercadolibre.com.ar/devcenter" target="_blank">Mercado
                     Libre</a> para crear una aplicación
                 </li>
+                <li>En nombre y descripcion poner cualquier valor</li>
                 <li>En 'Redirect URI' ingresar lo siguiente: https://{{ request.META.HTTP_HOST }}{% url 'mercadolibre:authorize_user' %}
                 </li>
                 <li>En 'Scopes' seleccionar todas las opciones. (read, offline access, write)
+                </li>
+                <li>En 'Topics' no seleccionar nada
+                </li>
+                <li>Crear la aplicación
                 </li>
                 <li>Obtener el ID y el Secret key e ingresarlos a continuación
                 </li>
