@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'Auth',
     'Config',
     'Products',
+    'Sales',
     'Stock',
     'Manufactures',
     'MercadoLibre',

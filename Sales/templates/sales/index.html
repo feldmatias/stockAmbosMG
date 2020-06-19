@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load get_sale_types dictionary_get_item get_months timezone_now %}
+
+{% block content %}
+    {% get_sale_types as sale_types %}
+    {% get_months as months %}
+    {% timezone_now as now %}
+
+    <h1 class="text-center my-5"><u>Detalle</u></h1>
+
+    <form method="GET" class="my-4 text-center form-inline justify-content-center">
+        <div class="form-row justify-content-center">
+            <div>
+                <select class="form-control mr-3" name="mes" required>
+                    {% for month in months %}
+                        <option value="{{ month.0 }}"
+                                {% if month.0 == data.month %}selected{% endif %}>{{ month.1 }}</option>
+                    {% endfor %}
+                </select>
+                <select class="form-control mr-3" name="año" required>
+                    {% for year in data.years %}
+                        <option value="{{ year }}" {% if year == data.year %}selected{% endif %}>{{ year }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-primary">Seleccionar Mes</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="mx-5 my-5 row justify-content-center text-center">
+
+        {% if data.sales %}
+
+            <table class="table table-hover w-50">
+                <thead>
+                <tr>
+                    <th scope="col" class="bg-light text-center"></th>
+                    {% for type in sale_types %}
+                        <th scope="col"
+                            class="bg-light text-center">{{ type.1 }}
+                        </th>
+                    {% endfor %}
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr>
+                    <td class="text-center align-middle">
+                        <b>Total del mes</b>
+                    </td>
+                    {% for type in sale_types %}
+                        <td class="text-center align-middle">
+                            {{ data.totals|get_item:type.0|default_if_none:0 }}
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td colspan="100" class="bg-light"></td>
+                </tr>
+
+                {% for day in data.sales.keys %}
+                    {% with data.sales|get_item:day as day_sales %}
+                        <tr>
+                            <td class="text-center align-middle">
+                                {{ day }} / {{ data.month }}
+                            </td>
+                            {% for type in sale_types %}
+                                <td class="text-center align-middle">
+                                    {{ day_sales|get_item:type.0|default_if_none:"" }}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endwith %}
+
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+        {% else %}
+
+            <div class="text-center font-italic text-primary h1">
+                No hay registros para este mes
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    <form method="POST" class="mt-4 text-center">
+        {% csrf_token %}
+
+        <h3 class="text-center mt-5 mb-3">Nuevo Registro</h3>
+
+        <div class="form-group row justify-content-center">
+            <label for="date" class="col-1 col-form-label">Fecha</label>
+            <div class="col-3">
+                <input type="date" min="0" class="form-control" id="date" name="date"
+                       autocomplete="off" value="{{ now|date:'Y-m-d' }}" required>
+            </div>
+        </div>
+
+        <div class="form-group row justify-content-center">
+            <label for="type" class="col-1 col-form-label">Tipo: </label>
+            <div class="col-3">
+                <select class="form-control" id="type" name="type" required>
+                    {% for type in sale_types %}
+                        <option value="{{ type.0 }}">{{ type.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row justify-content-center">
+            <label for="value" class="col-1 col-form-label">Monto</label>
+            <div class="col-3">
+                <input type="number" min="0" class="form-control" id="value" name="value"
+                       placeholder="Monto" autocomplete="off" required>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg mt-4">Agregar</button>
+    </form>
+
+{% endblock %}

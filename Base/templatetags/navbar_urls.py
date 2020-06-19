@@ -17,13 +17,18 @@ def navbar_urls():
             'active': 'cortes/'
         },
         {
-            'name': 'Mercado Libre',
-            'url': 'mercadolibre:index',
-            'active': 'mercadolibre/'
+            'name': 'Detalle',
+            'url': 'sales:index',
+            'active': 'detalle'
         },
         {
             'name': 'Configuración',
             'url': 'config:index',
             'active': 'configuracion/'
-        }
+        },
+        {
+            'name': 'Mercado Libre',
+            'url': 'mercadolibre:index',
+            'active': 'mercadolibre/'
+        },
     ]

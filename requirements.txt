@@ -13,6 +13,10 @@ django-model-utils==4.0.0
 gunicorn==20.0.4
 idna==2.9
 psycopg2==2.8.5
+<<<<<<< HEAD
+=======
+python-dateutil==2.8.1
+>>>>>>> 0c4f682295d1950519bd01a079f212f9ff0085c4
 pytz==2020.1
 requests==2.24.0
 six==1.15.0
