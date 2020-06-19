@@ -16,7 +16,7 @@ class Sale(models.Model):
     )
 
     value = models.IntegerField()
-    date = models.DateField(auto_now=True)
+    date = models.DateField(auto_now=False)
     type = models.CharField(max_length=255, choices=TYPES)
 
     objects = SaleManager()

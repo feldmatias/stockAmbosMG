@@ -27,7 +27,8 @@ class SalesView(View):
     def post(self, request, *args, **kwargs):
         sale_type = request.POST.get('type')
         value = request.POST.get('value')
+        date = request.POST.get('date')
 
-        Sale.objects.create_with_value(sale_type, value)
+        Sale.objects.create_with_value(sale_type, value, date)
 
         return redirect('sales:index')

@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
-{% load get_sale_types dictionary_get_item get_months %}
+{% load get_sale_types dictionary_get_item get_months timezone_now %}
 
 {% block content %}
     {% get_sale_types as sale_types %}
     {% get_months as months %}
+    {% timezone_now as now %}
 
     <h1 class="text-center my-5"><u>Detalle</u></h1>
 
@@ -90,7 +91,15 @@
     <form method="POST" class="mt-4 text-center">
         {% csrf_token %}
 
-        <h3 class="text-center mt-5 mb-3">Nuevo registro</h3>
+        <h3 class="text-center mt-5 mb-3">Nuevo Registro</h3>
+
+        <div class="form-group row justify-content-center">
+            <label for="date" class="col-1 col-form-label">Fecha</label>
+            <div class="col-3">
+                <input type="date" min="0" class="form-control" id="date" name="date"
+                       autocomplete="off" value="{{ now|date:'Y-m-d' }}" required>
+            </div>
+        </div>
 
         <div class="form-group row justify-content-center">
             <label for="type" class="col-1 col-form-label">Tipo: </label>
