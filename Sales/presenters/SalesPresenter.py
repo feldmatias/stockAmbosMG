@@ -1,7 +1,12 @@
+from django.utils import timezone
+
+
 class SalesPresenter:
 
-    def __init__(self, sales):
+    def __init__(self, sales, month, year):
         self.sales = sales
+        self.month = month
+        self.year = year
         self.calculate_totals()
 
     def calculate_totals(self):
@@ -11,3 +16,7 @@ class SalesPresenter:
             total += sale.value
             totals[sale.type] = total
         self.totals = totals
+
+    @property
+    def years(self):
+        return list(range(2020, timezone.now().year + 1))

@@ -20,7 +20,7 @@ class SalesView(View):
         sales = Sale.objects.for_month(int(month), int(year))
 
         data = {
-            'data': SalesPresenter(sales)
+            'data': SalesPresenter(sales, int(month), int(year))
         }
         return render(request, 'sales/index.html', data)
 
