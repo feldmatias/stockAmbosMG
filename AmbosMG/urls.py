@@ -21,6 +21,7 @@ urlpatterns = [
     path('stock/', include('Stock.urls', namespace='stock')),
     path('cortes/', include('Manufactures.urls', namespace='manufactures')),
     path('productos/', include('Products.urls', namespace='products')),
+    path('detalle/', include('Sales.urls', namespace='sales')),
     path('configuracion/', include('Config.urls', namespace='config')),
     path('usuarios/', include('django.contrib.auth.urls')),
     path('usuarios/', include('Auth.urls', namespace='users')),

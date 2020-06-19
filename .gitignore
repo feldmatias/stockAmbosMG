@@ -2,3 +2,4 @@
 
 /venv
 *.pyc
+/development.sqlite3
