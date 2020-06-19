@@ -12,7 +12,8 @@
             <div>
                 <select class="form-control mr-3" name="mes" required>
                     {% for month in months %}
-                        <option value="{{ month.0 }}" {% if month.0 == data.month %}selected{% endif %}>{{ month.1 }}</option>
+                        <option value="{{ month.0 }}"
+                                {% if month.0 == data.month %}selected{% endif %}>{{ month.1 }}</option>
                     {% endfor %}
                 </select>
                 <select class="form-control mr-3" name="año" required>
@@ -57,19 +58,19 @@
                     <td colspan="100" class="bg-light"></td>
                 </tr>
 
-                {% for sale in data.sales %}
-                    <tr>
-                        <td class="text-center align-middle">
-                            {{ sale.date|date:'d/m' }}
-                        </td>
-                        {% for type in sale_types %}
+                {% for day in data.sales.keys %}
+                    {% with data.sales|get_item:day as day_sales %}
+                        <tr>
                             <td class="text-center align-middle">
-                                {% if sale.type == type.0 %}
-                                    {{ sale.value }}
-                                {% endif %}
+                                {{ day }} / {{ data.month }}
                             </td>
-                        {% endfor %}
-                    </tr>
+                            {% for type in sale_types %}
+                                <td class="text-center align-middle">
+                                    {{ day_sales|get_item:type.0|default_if_none:"" }}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endwith %}
 
                 {% endfor %}
 
