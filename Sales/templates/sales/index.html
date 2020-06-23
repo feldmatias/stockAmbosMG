@@ -11,18 +11,17 @@
     <form method="GET" class="my-4 text-center form-inline justify-content-center">
         <div class="form-row justify-content-center">
             <div>
-                <select class="form-control mr-3" name="mes" required>
+                <select class="form-control mr-3" name="mes" id="month" required onchange="this.form.submit()">
                     {% for month in months %}
                         <option value="{{ month.0 }}"
                                 {% if month.0 == data.month %}selected{% endif %}>{{ month.1 }}</option>
                     {% endfor %}
                 </select>
-                <select class="form-control mr-3" name="año" required>
+                <select class="form-control mr-3" name="año" id="year" required onchange="this.form.submit()">
                     {% for year in data.years %}
                         <option value="{{ year }}" {% if year == data.year %}selected{% endif %}>{{ year }}</option>
                     {% endfor %}
                 </select>
-                <button type="submit" class="btn btn-primary">Seleccionar Mes</button>
             </div>
         </div>
     </form>
@@ -105,6 +104,7 @@
             <label for="type" class="col-1 col-form-label">Tipo: </label>
             <div class="col-3">
                 <select class="form-control" id="type" name="type" required>
+                    <option value=""></option>
                     {% for type in sale_types %}
                         <option value="{{ type.0 }}">{{ type.1 }}</option>
                     {% endfor %}
@@ -116,7 +116,7 @@
             <label for="value" class="col-1 col-form-label">Monto</label>
             <div class="col-3">
                 <input type="number" min="0" class="form-control" id="value" name="value"
-                       placeholder="Monto" autocomplete="off" required>
+                       autocomplete="off" required>
             </div>
         </div>
 
