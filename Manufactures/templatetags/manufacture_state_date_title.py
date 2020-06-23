@@ -8,7 +8,6 @@ register = template.Library()
 @register.filter
 def manufacture_state_date_title(state):
     state_dates = {
-        Manufacture.STATUS_PREPARATION: 'Fecha de creación',
         Manufacture.STATUS_CUT: 'Fecha de corte',
         Manufacture.STATUS_SEWING: 'Fecha de envío a costura'
     }

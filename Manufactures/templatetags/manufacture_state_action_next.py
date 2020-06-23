@@ -8,7 +8,6 @@ register = template.Library()
 @register.filter
 def manufacture_state_action_next(state):
     state_actions = {
-        Manufacture.STATUS_PREPARATION: 'Cortado',
         Manufacture.STATUS_CUT: 'En costura',
         Manufacture.STATUS_SEWING: 'Terminado'
     }

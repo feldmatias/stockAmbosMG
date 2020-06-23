@@ -11,8 +11,8 @@ class Sale(models.Model):
         ('2', 'Prendas Malabia'),
         ('3', 'Banco Luli'),
         ('4', 'Semana Luli'),
-        ('5', 'Retiros Dylan'),
-        ('6', 'Banco Dylan'),
+        ('5', 'Banco Dylan'),
+        ('6', 'Semana Dylan'),
     )
 
     value = models.IntegerField()
