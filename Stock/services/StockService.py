@@ -22,11 +22,6 @@ class StockService:
 
     def _update_stock(self, stock):
         """ Update stock at MercadoLibre in a thread """
-        thread = threading.Thread(target=update_stock_meli, args=[stock])
-        thread.setDaemon(True)
-        thread.start()
+        from MercadoLibre.services.MeradoLibreService import MercadoLibreService
+        MercadoLibreService().update_stock(stock)
 
-
-def update_stock_meli(stock):
-    from MercadoLibre.services.MeradoLibreService import MercadoLibreService
-    MercadoLibreService().update_stock(stock)
