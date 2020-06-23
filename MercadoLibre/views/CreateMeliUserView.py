@@ -13,8 +13,8 @@ class CreateMeliUserView(View):
 
     def post(self, request, *args, **kwargs):
         name = request.POST.get('name')
-        client_id = request.POST.get('clientId')
-        client_secret = request.POST.get('clientSecret')
+        client_id = request.POST.get('clientId', '').strip()
+        client_secret = request.POST.get('clientSecret', '').strip()
 
         user = MeliUser.objects.create_user(name, client_id, client_secret)
         redirect_url = request.build_absolute_uri(reverse('mercadolibre:authorize_user'))

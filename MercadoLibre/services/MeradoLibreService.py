@@ -6,14 +6,15 @@ import requests
 class MercadoLibreService:
 
     def get_authorization_url(self, meli_user, redirect_url):
-        params = {'client_id': meli_user.client_id, 'response_type': 'code', 'redirect_uri': redirect_url}
+        params = {'client_id': meli_user.client_id, 'response_type': 'code',
+                  'redirect_uri': redirect_url.replace('http://', 'https://')}
         url = 'https://auth.mercadolibre.com.ar/authorization' + '?' + urlencode(params)
         return url
 
     def authorize_user(self, meli_user, code, redirect_url):
         params = {'grant_type': 'authorization_code', 'client_id': meli_user.client_id,
                   'client_secret': meli_user.client_secret,
-                  'code': code, 'redirect_uri': redirect_url}
+                  'code': code, 'redirect_uri': redirect_url.replace('http://', 'https://')}
 
         authorized = self.set_user_authorization(meli_user, params)
         if not authorized:
@@ -115,6 +116,7 @@ class MercadoLibreService:
             item = mapping.meli_item
             variation_id = mapping.item_id
 
+            self.check_access_token(item.meli_user)
             url = f"https://api.mercadolibre.com/items/{item.item_id}/variations/{variation_id}?access_token={item.meli_user.access_token}"
             for i in range(50):
                 response = requests.put(url, json={"available_quantity": stock.stock})
