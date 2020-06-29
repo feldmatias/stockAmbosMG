@@ -17,5 +17,5 @@ urlpatterns = [
     path('usuarios/eliminar/<int:id>', DeleteMeliUserView.as_view(), name='delete_user'),
     path('publicaciones/mapear/<int:user_id>', MapMeliItemsView.as_view(), name='map_items'),
     path('publicaciones/mapear_talles_colores/<int:user_id>', MapMeliItemVariationsView.as_view(), name='map_item_variations'),
-    path('publicaciones/actualizar_stock/', UpdateMeliStockView.as_view(), name='update_stock'),
+    path('publicaciones/actualizar_stock/<int:user_id>', UpdateMeliStockView.as_view(), name='update_stock'),
 ]

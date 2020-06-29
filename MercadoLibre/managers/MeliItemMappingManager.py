@@ -29,3 +29,6 @@ class MeliItemMappingManager(models.Manager):
 
     def get_all_for(self, color, size):
         return self.filter(color=color, size=size).all()
+
+    def get_all_for_user(self, meli_user):
+        return self.filter(meli_item__meli_user=meli_user).all()
