@@ -26,6 +26,42 @@
         </div>
     </form>
 
+    <form method="POST" class="mt-4 text-center">
+        {% csrf_token %}
+
+        <h3 class="text-center mt-5 mb-3">Nuevo Registro</h3>
+
+        <div class="form-group row justify-content-center">
+            <label for="date" class="col-1 col-form-label">Fecha</label>
+            <div class="col-3">
+                <input type="date" min="0" class="form-control" id="date" name="date"
+                       autocomplete="off" value="{{ now|date:'Y-m-d' }}" required>
+            </div>
+        </div>
+
+        <div class="form-group row justify-content-center">
+            <label for="type" class="col-1 col-form-label">Tipo: </label>
+            <div class="col-3">
+                <select class="form-control" id="type" name="type" required>
+                    <option value=""></option>
+                    {% for type in sale_types %}
+                        <option value="{{ type.0 }}">{{ type.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row justify-content-center">
+            <label for="value" class="col-1 col-form-label">Monto</label>
+            <div class="col-3">
+                <input type="number" min="0" class="form-control" id="value" name="value"
+                       autocomplete="off" required>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg mt-4">Agregar</button>
+    </form>
+
     <div class="mx-5 my-5 row justify-content-center text-center">
 
         {% if data.sales %}
@@ -66,7 +102,7 @@
                             </td>
                             {% for type in sale_types %}
                                 <td class="text-center align-middle">
-                                    {{ day_sales|get_item:type.0|default_if_none:"" }}
+                                    {{ day_sales|get_item:type.0|default:"" }}
                                 </td>
                             {% endfor %}
                         </tr>
@@ -86,41 +122,5 @@
         {% endif %}
 
     </div>
-
-    <form method="POST" class="mt-4 text-center">
-        {% csrf_token %}
-
-        <h3 class="text-center mt-5 mb-3">Nuevo Registro</h3>
-
-        <div class="form-group row justify-content-center">
-            <label for="date" class="col-1 col-form-label">Fecha</label>
-            <div class="col-3">
-                <input type="date" min="0" class="form-control" id="date" name="date"
-                       autocomplete="off" value="{{ now|date:'Y-m-d' }}" required>
-            </div>
-        </div>
-
-        <div class="form-group row justify-content-center">
-            <label for="type" class="col-1 col-form-label">Tipo: </label>
-            <div class="col-3">
-                <select class="form-control" id="type" name="type" required>
-                    <option value=""></option>
-                    {% for type in sale_types %}
-                        <option value="{{ type.0 }}">{{ type.1 }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group row justify-content-center">
-            <label for="value" class="col-1 col-form-label">Monto</label>
-            <div class="col-3">
-                <input type="number" min="0" class="form-control" id="value" name="value"
-                       autocomplete="off" required>
-            </div>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-lg mt-4">Agregar</button>
-    </form>
 
 {% endblock %}
