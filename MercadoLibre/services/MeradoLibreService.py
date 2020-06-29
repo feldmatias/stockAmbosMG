@@ -112,19 +112,6 @@ class MercadoLibreService:
         mappings = MeliItemMapping.objects.get_all_for(stock.color, stock.size).select_related('meli_item',
                                                                                                'meli_item__product',
                                                                                                'meli_item__meli_user')
-        self._update_stock(mappings, stock)
-
-    def update_user_stock(self, meli_user):
-        from Stock.models import Stock
-        from MercadoLibre.models import MeliItemMapping
-        mappings = MeliItemMapping.objects.get_all_for_user(meli_user).select_related('meli_item',
-                                                                                      'meli_item__product',
-                                                                                      'meli_item__meli_user')
-        for mapping in mappings:
-            stock = Stock.objects.find_or_create(mapping.color, mapping.size)
-            self._update_stock([mapping], stock)
-
-    def _update_stock(self, mappings, stock):
         for mapping in mappings:
             item = mapping.meli_item
             variation_id = mapping.item_id

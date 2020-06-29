@@ -6,7 +6,7 @@
     <a href="{% url 'mercadolibre:map_item_variations' user_id=user.id %}"
        class="btn btn-outline-secondary btn-m mr-2">Mapear Talles y Colores</a>
 
-    <a href="{% url 'mercadolibre:update_stock' user_id=user.id %}"
+    <a href="{% url 'mercadolibre:update_stock' %}"
        class="btn btn-outline-secondary btn-m mr-2">Actualizar Stock</a>
 
     {% include 'common/delete_button.html' with url='mercadolibre:delete_user' id=user.id class='btn-outline-secondary btn-m' %}
