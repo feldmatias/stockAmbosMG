@@ -17,12 +17,8 @@ class StockService:
             stock.add_stock(item.count)
             self._update_stock(stock)
 
-    def update_all_stocks(self):
-        for stock in Stock.repository.all():
-            self._update_stock(stock)
-
     def _update_stock(self, stock):
-        """ Update stock at MercadoLibre in a thread """
+        """ Update stock at MercadoLibre """
         from MercadoLibre.services.MeradoLibreService import MercadoLibreService
         MercadoLibreService().update_stock(stock)
 
