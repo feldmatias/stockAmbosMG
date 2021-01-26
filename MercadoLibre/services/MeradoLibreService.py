@@ -118,7 +118,7 @@ class MercadoLibreService:
 
             self.check_access_token(item.meli_user)
             url = f"https://api.mercadolibre.com/items/{item.item_id}/variations/{variation_id}?access_token={item.meli_user.access_token}"
-            for i in range(50):
+            for i in range(500):
                 response = requests.put(url, json={"available_quantity": stock.stock})
                 if response.status_code == 200:
                     break
