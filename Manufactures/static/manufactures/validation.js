@@ -8,7 +8,7 @@ function validate_manufacture_form() {
     });
 
     if (!valid) {
-        alert('El corte debe tener por lo menos un color');
+        alert('El pedido debe tener por lo menos un color');
     }
     return valid;
 }

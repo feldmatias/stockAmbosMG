@@ -8,11 +8,13 @@ class Sale(models.Model):
 
     TYPES = Choices(
         ('1', 'Prendas Correo'),
-        ('2', 'Prendas Malabia'),
-        ('3', 'Banco Luli'),
-        ('4', 'Semana Luli'),
-        ('5', 'Banco Dylan'),
-        ('6', 'Semana Dylan'),
+        ('2', 'Facturas Ventas'),
+        ('3', 'Facturas Compras'),
+        ('4', 'Liquidación Laura'),
+        ('5', 'Liquidación Graciela'),
+        ('6', 'Publicidad'),
+        ('7', 'Gastos'),
+        ('8', 'Impuestos'),
     )
 
     value = models.IntegerField()

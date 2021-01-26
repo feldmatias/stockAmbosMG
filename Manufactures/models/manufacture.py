@@ -12,8 +12,7 @@ class Manufacture(StatusModel):
     STATUS_SEWING = 'en_costura'
 
     STATUS = Choices(
-        (STATUS_CUT, 'Cortados'),
-        (STATUS_SEWING, 'En costura')
+        (STATUS_SEWING, 'Pedidos')
     )
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

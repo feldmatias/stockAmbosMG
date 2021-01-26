@@ -39,9 +39,9 @@ class ManufactureCreateView(View):
         if manufacture_id:
             manufacture = get_object_or_404(Manufacture, pk=manufacture_id)
             Manufacture.repository.edit_with_items(manufacture, size, status, colors)
-            messages.success(request, 'Corte editado con éxito')
+            messages.success(request, 'Pedido editado con éxito')
         else:
             Manufacture.repository.create_with_items(product, size, status, colors)
-            messages.success(request, 'Corte creado con éxito')
+            messages.success(request, 'Pedido creado con éxito')
 
         return redirect('manufactures:list', state=status)

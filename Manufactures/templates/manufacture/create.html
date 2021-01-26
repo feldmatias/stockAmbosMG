@@ -4,7 +4,7 @@
 {% block content %}
     {% manufacture_all_states as all_states %}
 
-    <h1 class="text-center mt-5"><u>{% if data.manufacture %}Editar{% else %}Nuevo{% endif %} Corte</u></h1>
+    <h1 class="text-center mt-5"><u>{% if data.manufacture %}Editar{% else %}Nuevo{% endif %} Pedido</u></h1>
 
     {% if not data.manufacture %}
         {% include "products/products_bar.html" with selected=data.product url='manufactures:create-product' %}
